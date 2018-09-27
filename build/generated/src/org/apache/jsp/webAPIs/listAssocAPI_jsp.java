@@ -4,12 +4,12 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
 import dbUtils.*;
-import model.Other.*;
+import model.Assoc.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import com.google.gson.*;
 
-public final class listOtherAPI_jsp extends org.apache.jasper.runtime.HttpJspBase
+public final class listAssocAPI_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
 
   private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();
@@ -63,9 +63,11 @@ public final class listOtherAPI_jsp extends org.apache.jasper.runtime.HttpJspBas
     System.out.println("*** Db Error is this (empty string means all good): " + dbc.getErr());
     if (strDataList.dbError.length() == 0) { // if got good DB connection, 
         try {
-            String sql = "SELECT * "
-                    + "FROM flavor "
-                    + "ORDER BY flavor_id ASC;";
+            String sql = "SELECT supply_id, selling_price, special_additions, flavor_name, store_name "
+                    + "FROM supply s "
+                    + "JOIN web_user w on w.web_user_id=s.web_user_id "
+                    + "JOIN flavor f on s.flavor_id=f.flavor_id "
+                    + "ORDER BY supply_id ASC;";
 
             System.out.println("*** Ready to prepare statement. Sql is: " + sql);
             PreparedStatement stmt = dbc.getConn().prepareStatement(sql);

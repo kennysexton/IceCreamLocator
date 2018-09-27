@@ -1,0 +1,11 @@
+SMAP
+listAssocAPI_jsp.java
+JSP
+*S JSP
+*F
++ 0 listAssocAPI.jsp
+webAPIs/listAssocAPI.jsp
+*L
+1,8:49
+10,39:58
+*E

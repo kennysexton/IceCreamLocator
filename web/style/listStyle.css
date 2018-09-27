@@ -1,0 +1,19 @@
+/* Style the HTML table that shows the tabular database data */
+
+#dataList table {
+    margin:auto;     /* margin:auto makes left and right margins the same, centers the table */
+    margin-top: -1em;
+}
+
+#dataList td {
+    padding: 4px;
+    background-color: #EEEEEE;
+    font-size:13px;
+}
+
+#dataList thead td {  /* style of td elements that are inside of a thead element (column headings)) */
+    background-color: #DDDDDD;
+    font-weight: bold;
+    font-size:16px;
+    padding-top:10px;
+}

@@ -27,10 +27,18 @@ body {
     letter-spacing: 1px;
 }
 
+.subMenu {
+    background-color:white;
+    font-size:0.9em;
+    line-height: 1.7em;
+    display:none;
+    margin-top:0.8ex;
+}
 /* "#nav a" styles links inside of element with id="nav" */
 #nav a {
     text-decoration:none;  /* Do not links in "nav" to be underlined */
-    color: #C8C8C8; /* light gray */
+    color: #080808; /* light gray */
+    cursor: pointer;
 }
 
 /* Styles any div inside of an element with id="nav". */
@@ -49,13 +57,13 @@ body {
 /* When the user hover's over a div that's inside of and element with 
    id="nav", this styling will kick in. */
 #nav div:hover {
-    background-color: white; /* this is the turqoise color */
+    background-color: white; 
 }
 
 /* When the user hovers over a div that's inside of an element with 
    id="nav", the text of links inside the div will change color. */
 #nav div:hover a {
-    color: black;
+    color: #000;
 }
 
 .stopFloat { /* We float divs left in desktop layout to create multiple columns. Put
@@ -66,6 +74,7 @@ body {
     padding-left:4px;	
     padding-right:4px;	
     padding-bottom: 30px;
+    padding-top: 4%;
 }
 
 /* I made the footer be always fixed to the bottom of the browser window. */
@@ -82,8 +91,7 @@ body {
 }
 
 .width33Pct { /* right column in my layout */
-    /* border: thin solid red; Use a rule like this to see where a div is to debug. */
-    padding-top: 22px;
+    padding-top: 50px;
     padding: 1%;
     width:33.3%;
     float:left;

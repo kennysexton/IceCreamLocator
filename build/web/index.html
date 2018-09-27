@@ -4,7 +4,8 @@
         <title>Ice Cream Locator</title>
 
         <!-- Use this type of comment within HTML -->
-        <link href="style/myStyle.css" rel="stylesheet" type="text/css" /> 
+        <link href="style/myStyle.css" rel="stylesheet" type="text/css" />
+        <link href="style/listStyle.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
 
@@ -18,8 +19,16 @@
             <!-- The style sheet has nav floated right -->
             <div id="nav">
                 <div><a onclick = " ajaxCall('htmlPartials/homeContent.html', setContent, setError) ">Home</a></div>
-                <div><a onclick = " ajaxCall('htmlPartials/blogContent.html', setContent, setError) ">Blog</a></div>
+                <div onclick="toggleChild(this)">&nbsp;&nbsp;&nbsp;&nbsp;Data&nbsp;&nbsp;&nbsp;&nbsp;
+                    <div class="subMenu">
+                        <a onclick = "ajaxCall('webAPIs/listUsersAPI.jsp', setUserContent, setError)">Users</a><br/>
+                        <a onclick = "ajaxCall('webAPIs/listOtherAPI.jsp', setUserContent, setError)">Flavors</a><br/>
+                        <a onclick = "ajaxCall('webAPIs/listAssocAPI.jsp', setUserContent, setError)">Supply</a>
+                    </div>
+                </div>
+                <div><a onclick = " ajaxCall('htmlPartials/blogContent.html', setContent, setError) ">Blog</a></div> 
             </div>
+            <div class="stopFloat"></div>
             <div id="content"></div>
 
             <!-- Must stop the floating so that elements below (e.g., content) 
@@ -34,6 +43,8 @@
         
         <!-- It is as if the code from this javascript file was copy/pasted here. -->
         <script src="js/ajaxUtilities.js"></script>
+        <script src="js/buildTable.js"></script>
+        <script src="js/dropDownMenu.js"></script>
 
         <script>
 
@@ -52,6 +63,36 @@
 
                     // Make sure initial page load has home content displayed. 
                     ajaxCall('htmlPartials/homeContent.html', setContent, setError);
+                    
+                    function setUserContent(httpRequest) {
+
+                        console.log("listUsersResponse - here is the value of httpRequest object (next line)");
+                        console.log(httpRequest);
+
+                        var dataList = document.createElement("div");
+                        dataList.id = "dataList"; // this is for styling the HTML table.
+                        document.getElementById("content").innerHTML = "";
+                        document.getElementById("content").appendChild(dataList);
+                        
+                        var obj = JSON.parse(httpRequest.responseText);
+
+                        if (obj === null) {
+                            dataList.innerHTML = "listUsersResponse Error: JSON string evaluated to null.";
+                            return;
+                        }
+                        
+                        
+                        for (var i = 0; i< obj.webUserList.length; i++) {
+                            delete obj.webUserList[i].userPassword2;
+                        }
+
+                        // buildTable Parameters: 
+                        // First:  array of objects that are to be built into an HTML table.
+                        // Second: string that is database error (if any) or empty string if all OK.
+                        // Third:  reference to DOM object where built table is to be stored. 
+                        buildTable(obj.webUserList, obj.dbError, dataList);
+
+                    }
 
         </script>
     </body>

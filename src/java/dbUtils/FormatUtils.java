@@ -118,4 +118,8 @@ public class FormatUtils {
         return out;
     } // formatString
 
+    public static String formatBigDecimal(Object object) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 } // FormatUtils class

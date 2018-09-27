@@ -1,6 +1,6 @@
 <%@page contentType="application/json; charset=UTF-8" pageEncoding="UTF-8"%> 
 <%@page language="java" import="dbUtils.*" %>
-<%@page language="java" import="model.webUser.*" %> 
+<%@page language="java" import="model.Other.*" %> 
 <%@page language="java" import="java.sql.PreparedStatement" %> 
 <%@page language="java" import="java.sql.ResultSet" %> 
 <%@page language="java" import="com.google.gson.*" %>
@@ -16,8 +16,8 @@
     if (strDataList.dbError.length() == 0) { // if got good DB connection, 
         try {
             String sql = "SELECT * "
-                    + "FROM flavor;"
-                    + "";
+                    + "FROM flavor "
+                    + "ORDER BY flavor_id ASC;";
 
             System.out.println("*** Ready to prepare statement. Sql is: " + sql);
             PreparedStatement stmt = dbc.getConn().prepareStatement(sql);

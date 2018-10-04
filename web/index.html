@@ -18,16 +18,23 @@
 
             <!-- The style sheet has nav floated right -->
             <div id="nav">
-                <div><a onclick = " ajaxCall('htmlPartials/homeContent.html', setContent, setError) ">Home</a></div>
-                <div onclick="toggleChild(this)">&nbsp;&nbsp;&nbsp;&nbsp;Data&nbsp;&nbsp;&nbsp;&nbsp;
-                    <div class="subMenu">
+                <div><a  onclick = "ajaxCall('htmlPartials/homeContent.html', setContent, setError) ">Home</a></div>
+                <div class="dropdown" onclick="toggleChild(this)">Data
+                    <div class="dropdown-content">
                         <a onclick = "ajaxCall('webAPIs/listUsersAPI.jsp', setUserContent, setError)">Users</a><br/>
                         <a onclick = "ajaxCall('webAPIs/listOtherAPI.jsp', setUserContent, setError)">Flavors</a><br/>
                         <a onclick = "ajaxCall('webAPIs/listAssocAPI.jsp', setUserContent, setError)">Supply</a>
                     </div>
                 </div>
                 <div><a onclick = " ajaxCall('htmlPartials/blogContent.html', setContent, setError) ">Blog</a></div> 
-            </div>
+                <div class="dropdown" onclick="toggleChild(this)">Account
+                    <div class="dropdown-content">
+                        <a onclick = "ajaxCall('htmlPartials/logonContent.html', setContent, setError)">Log on</a><br/>
+                        <a onclick = "ajaxCall('webAPIs/logoffAPI.jsp', setUserContent, setError)">Log off</a><br/>
+                        <a onclick = "ajaxCall('webAPIs/getProfileAPI.jsp', setUserContent, setError)">Profile</a>
+                    </div>
+                </div>
+             </div>
             <div class="stopFloat"></div>
             <div id="content"></div>
 
@@ -45,6 +52,7 @@
         <script src="js/ajaxUtilities.js"></script>
         <script src="js/buildTable.js"></script>
         <script src="js/dropDownMenu.js"></script>
+        <script src="js/logon.js"></script>
 
         <script>
 

@@ -22,23 +22,41 @@ body {
     float:left;
 }
 #nav {
-    margin-right:2%;
+    margin-right:3%;
     float:right; /* shares same line with PageTitle */
     letter-spacing: 1px;
 }
 
-.subMenu {
-    background-color:white;
-    font-size:0.9em;
-    line-height: 1.7em;
-    display:none;
-    margin-top:0.8ex;
+.dropdown {
+    position: relative;
+    display: inline-block;
 }
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 100px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 2px 2px;
+    font-size: 12px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown a:hover {background-color: #ddd;}
 /* "#nav a" styles links inside of element with id="nav" */
 #nav a {
     text-decoration:none;  /* Do not links in "nav" to be underlined */
     color: #080808; /* light gray */
     cursor: pointer;
+    padding-top: 0px;
 }
 
 /* Styles any div inside of an element with id="nav". */
@@ -46,8 +64,7 @@ body {
     margin-top:3px;
     float:left;
     font-size:18px;
-    padding: 6px;
-    padding-top:34px;
+    padding: 34px 7px 0px 7px;
     height: 33px;
     text-align:center;
     letter-spacing: 1px;
@@ -118,4 +135,9 @@ a:hover {  /* on hover for links */
 
 a:visited {
     color: darkmagenta;
+}
+
+.center {
+    margin: 0 30%;
+    min-width: 1000px;
 }

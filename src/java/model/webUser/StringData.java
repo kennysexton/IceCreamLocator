@@ -18,12 +18,14 @@ public class StringData {
     public String webUserId = "";
     public String userEmail = "";
     public String userPassword = "";
+    public String userPassword2 = "";
     public String birthday = "";
     public String membershipFee = "";
     public String userRoleId = "";   // Foreign Key
     public String userRoleType = ""; // getting it from joined user_role table.
 
     public String errorMsg = "";
+    
 
     // default constructor leaves all data members with empty string (Nothing null).
     public StringData() {

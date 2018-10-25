@@ -1,0 +1,51 @@
+<!-- 
+
+It is very useful to copy/paste the data obtained by running the insert API
+directly (like what i did below). This will let you know the exact field names
+that you used in your StringData (java object - because gson uses these when it 
+converts java object to JSON). 
+
+You can name the ids (in the HTML below) anything you like, but it may be simplest to 
+just name them exactly the same as you did when you created your StringData 
+field names (less field name mappings for you to have to remember).
+
+{
+"webUserId": "",
+"userEmail": "Input is required",
+"userPassword": "Input is required",
+"userPassword2": "",
+"birthday": "",
+"membershipFee": "",
+"userRoleId": "Please enter an dollar amount",
+"userRoleType": "",
+"errorMsg": "Please try again"
+}
+
+-->
+
+<div id="insertArea">
+
+    <table>
+        <tr>
+            <td>Flavor Name</td>
+            <td><input type="text"  id="flavor_name" /></td>
+            <td id="flavor_nameError" class="error"></td> 
+        </tr>
+        <tr>
+            <td>Date Added</td>
+            <td><input type="text"  id="date_added" /></td>
+            <td id="date_addedError" class="error"></td>
+        </tr>
+        <tr>
+            <td>Flavor Color</td>
+            <td><input type="text" id="flavor_color" /></td>
+            <td id="flavor_colorError" class="error"></td>
+        </tr>
+        <tr>
+            
+            <td><button onclick="otherCRUD.insertSave()">Save</button></td>
+            <td id="recordError2" class="error"></td>
+            <td></td>
+        </tr>
+    </table>
+</div>

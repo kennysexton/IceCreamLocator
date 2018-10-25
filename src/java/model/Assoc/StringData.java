@@ -1,7 +1,6 @@
 package model.Assoc;
 
 import model.Assoc.*;
-import model.webUser.*;
 import dbUtils.FormatUtils;
 import java.sql.ResultSet;
 

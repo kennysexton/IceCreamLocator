@@ -1,7 +1,6 @@
 package model.Assoc;
 
-import model.Other.*;
-import model.webUser.*;
+import model.Assoc.*;
 import java.util.ArrayList;
 import java.sql.ResultSet;
 

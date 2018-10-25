@@ -1,18 +1,26 @@
 /* Style the HTML table that shows the tabular database data */
 
+#dataList h2 {
+    text-align: center;
+}
+
+#dataList h2 img {
+    margin-bottom: -4px;
+    
+}
+
 #dataList table {
     margin:auto;     /* margin:auto makes left and right margins the same, centers the table */
-    margin-top: -1em;
 }
 
 #dataList td {
     padding: 4px;
-    background-color: #EEEEEE;
+    background-color: #DDEEEE;
     font-size:13px;
 }
 
 #dataList thead td {  /* style of td elements that are inside of a thead element (column headings)) */
-    background-color: #DDDDDD;
+    background-color: #AABBCC;
     font-weight: bold;
     font-size:16px;
     padding-top:10px;

@@ -1,43 +1,59 @@
 // Make an ajax call to the given url. Then, once the call has been made 
 // then if the call was successful, call the Success Callback fn, otherwise, 
 // call the Failure CallBack function. 
-function ajaxCall(url, callBackSuccess, callBackFailure) {
+// ********************** ajax *************************************   
+// Make an ajax call to the given url, then if the call was successful, 
+// call the Success Callback fn, otherwise, set an error message into the 
+// DOM element that has id 'errorId' (or if errorId was not supplied or 
+// invalid, alert the error message to the user/HTML coder).
+function ajaxCall(url, callBackSuccess, errorId) {
 
-    // The httpReq Object is now local to function "ajaxCall" (not global)
+// The httpReq Object is now local to function "ajaxCall" (not global)
     var httpReq;
     if (window.XMLHttpRequest) {
-        httpReq = new XMLHttpRequest();  //For Firefox, Safari, Opera
+        httpReq = new XMLHttpRequest(); //For Firefox, Safari, Opera
     } else if (window.ActiveXObject) {
-        httpReq = new ActiveXObject("Microsoft.XMLHTTP");    //For IE 5+
+        httpReq = new ActiveXObject("Microsoft.XMLHTTP"); //For IE 5+
     } else {
         alert('ajax not supported');
+        return;
     }
 
-    console.log("ready to get content " + url);
-    httpReq.open("GET", url); // specify which page you want to get
+    console.log("ajax.js: ready to make ajax call to " + url);
+    httpReq.open("GET", url); // specify the page you want to GET
 
-    // Save the url into the httpReq object (into a custom property that Sally 
-    // is adding to the browser supplied http request object).
-    httpReq.myUrl = url;
-
-    // Ajax calls are asyncrhonous (non-blocking). Specify the code that you 
-    // want to run when the response (to the http request) is available. 
+    // Specify the function that you want to run once the ajax call has returned
+    // the data. Ajax calls are asyncrhonous (non-blocking). So, after you specify 
+    // the function, some time may pass before the function runs. 
     httpReq.onreadystatechange = function () {
 
         // readyState == 4 means that the http request is complete
         if (httpReq.readyState === 4) {
             if (httpReq.status === 200) {
-                callBackSuccess(httpReq);
-            } else {
-                // First use of property creates new (custom) property
-                httpReq.errorMsg = "Error (" + httpReq.status + " " + httpReq.statusText +
+                callBackSuccess(httpReq); // success, call the function that was provided by HTML coder
+                
+            } else { // status code indicates that ajax call didnt return anything (e.g., bad url, no internet connection) 
+                
+                // communicate error
+                var errorMsg = "ajax.js error (" + httpReq.status + " " + httpReq.statusText +
                         ") while attempting to read '" + url + "'";
-                callBackFailure(httpReq);
+                console.log(errorMsg);
+                
+                if (errorId) { // if the HTML coder passed in an errorId
+                    if (document.getElementById(errorId)) { // and if that errorId points to a valid DOM element
+                        // place error message into the UI
+                        document.getElementById(errorId).innerHTML = errorMsg;
+                    } else {
+                        alert(errorMsg+" -- and errorId is invalid: "+errorId);
+                    }
+                } else {
+                    alert(errorMsg+" -- and errorId was not supplied");
+                }
             }
         }
-    };  // end of anonymous function
+    }; // end of anonymous function
 
     httpReq.send(null); // initiate ajax call
 
-} // end function ajaxCall
+} // end function ajax
 

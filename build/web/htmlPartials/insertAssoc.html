@@ -1,0 +1,42 @@
+<div id="insertArea">
+
+    <table>
+        <tr>
+            <td>Selling Price</td>
+            <td><input type="text"  id="selling_price" /></td>
+            <td id="selling_priceError" class="error"></td> 
+        </tr>
+        <tr>
+            <td>Special Additions</td>
+            <td><input type="text"  id="special_additions" /></td>
+            <td id="special_additionsError" class="error"></td>
+        </tr>
+        <tr>
+            <td>Flavor ID</td>  
+            <td>
+                <select id="flavorPickList">
+                    <!-- JS code will make ajax call to get all the roles 
+                    then populate this select tag's options with those roles -->
+                </select>
+            </td>
+
+            <td id="flavor_idError" class="error"></td>
+        </tr>
+        <tr>
+            <td>Web User ID</td>  
+            <td>
+                <select id="web_userPickList">
+                    <!-- JS code will make ajax call to get all the roles 
+                    then populate this select tag's options with those roles -->
+                </select>
+            </td>
+
+            <td id="web_userError" class="error"></td>
+        </tr>
+        <tr>
+            <td><button onclick="assocCRUD.insertSave()">Save</button></td>
+            <td id="recordError" class="error"></td>
+            <td></td>
+        </tr>
+    </table>
+</div>

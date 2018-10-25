@@ -1,0 +1,72 @@
+<!-- 
+
+It is very useful to copy/paste the data obtained by running the insert API
+directly (like what i did below). This will let you know the exact field names
+that you used in your StringData (java object - because gson uses these when it 
+converts java object to JSON). 
+
+You can name the ids (in the HTML below) anything you like, but it may be simplest to 
+just name them exactly the same as you did when you created your StringData 
+field names (less field name mappings for you to have to remember).
+
+{
+"webUserId": "",
+"userEmail": "Input is required",
+"userPassword": "Input is required",
+"userPassword2": "",
+"birthday": "",
+"membershipFee": "",
+"userRoleId": "Please enter an dollar amount",
+"userRoleType": "",
+"errorMsg": "Please try again"
+}
+
+-->
+
+<div id="insertArea">
+
+    <table>
+        <tr>
+            <td>Email Address</td>
+            <td><input type="text"  id="userEmail" /></td>
+            <td id="userEmailError" class="error"></td> 
+        </tr>
+        <tr>
+            <td>Password</td>
+            <td><input type="password"  id="userPassword" /></td>
+            <td id="userPasswordError" class="error"></td>
+        </tr>
+        <tr>
+            <td>Retype Your Password</td>
+            <td><input type="password" id="userPassword2" /></td>
+            <td id="userPassword2Error" class="error"></td>
+        </tr>
+        <tr>
+            <td>Birthday</td>
+            <td><input type="text" id="birthday" /></td>
+            <td id="birthdayError" class="error"></td> 
+        </tr>
+        <tr>
+            <td>Membership Fee</td>
+            <td><input type="text" id="membershipFee" /></td>
+            <td id="membershipFeeError" class="error"></td>
+        </tr>
+        <tr>
+            <td>User Role</td>  
+            <td>
+                <select id="rolePickList">
+                    <!-- JS code will make ajax call to get all the roles 
+                    then populate this select tag's options with those roles -->
+                </select>
+            </td>
+
+            <td id="userRoleIdError" class="error"></td>
+        </tr>
+        <tr>
+            <!-- see js/insertUser.js to see the insertUser function (make sure index.html referencesinvokes the js file) -->
+            <td><button onclick="userCRUD.insertSave()">Save</button></td>
+            <td id="recordError" class="error"></td>
+            <td></td>
+        </tr>
+    </table>
+</div>

@@ -1,6 +1,6 @@
 package model.Other;
 
-import model.webUser.*;
+import model.Other.*;
 import dbUtils.FormatUtils;
 import java.sql.ResultSet;
 

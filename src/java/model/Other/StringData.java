@@ -35,12 +35,13 @@ public class StringData {
             this.flavor_color = FormatUtils.formatString(results.getObject("flavor_color"));
             
         } catch (Exception e) {
-            this.errorMsg = "Exception thrown in model.webUser.StringData (the constructor that takes a ResultSet): " + e.getMessage();
+            this.errorMsg = "Exception thrown in model.Other.StringData (the constructor that takes a ResultSet): " + e.getMessage();
         }
     }
 
     public int getCharacterCount() {
         String s = this.flavor_id + this.flavor_name + this.date_added + this.flavor_color;
+        //String s = this.flavor_id + this.flavor_name;
                 
         return s.length();
     }

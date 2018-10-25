@@ -37,7 +37,7 @@ public class StringData {
             this.store_name = FormatUtils.formatString(results.getObject("store_name"));
             
         } catch (Exception e) {
-            this.errorMsg = "Exception thrown in model.webUser.StringData (the constructor that takes a ResultSet): " + e.getMessage();
+            this.errorMsg = "Exception thrown in model.Assoc.StringData (the constructor that takes a ResultSet): " + e.getMessage();
         }
     }
 

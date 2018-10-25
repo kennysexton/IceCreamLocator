@@ -16,16 +16,7 @@ public class DbMods {
 
         StringData errorMsgs = new StringData();
 
-        /* Useful to copy field names from StringData as a reference
-    public String webUserId = "";
-    public String userEmail = "";
-    public String userPassword = "";
-    public String userPassword2 = "";
-    public String birthday = "";
-    public String membershipFee = "";
-    public String userRoleId = "";   // Foreign Key
-    public String userRoleType = ""; // getting it from joined user_role table.
-         */
+    
         // Validation
         errorMsgs.flavor_name = ValidationUtils.stringValidationMsg(inputData.flavor_name, 45, true);
         errorMsgs.date_added = ValidationUtils.stringValidationMsg(inputData.date_added, 45, false);

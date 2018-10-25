@@ -29,19 +29,6 @@ var assocCRUD = {};
                     return;
                 }
 
-                /*  copy/pasting the first entry from the output of my get role API
-                 * 
-                 {
-                 "dbError": "",
-                 "roleList": [
-                 {
-                 "userRoleId": "1",
-                 "userRoleType": "Admin",
-                 "errorMsg": ""
-                 },
-                 */
-
-                // function makePickList(list, keyProp, valueProp, selectListId) {
                 makePickList(jsonObj.roleList, "userRoleId", "userRoleType", "rolePickList");
             }
         }
@@ -227,17 +214,17 @@ var assocCRUD = {};
                 return;
             }
 
-            for (var i = 0; i < obj.webUserList.length; i++) {
+            for (var i = 0; i < obj.flavorList.length; i++) {
 
                 // remove a property from each object in webUserList 
-                delete obj.webUserList[i].userPassword2;
+                delete obj.flavorList[i].userPassword2;
             }
 
             // buildTable Parameters: 
             // First:  array of objects that are to be built into an HTML table.
             // Second: string that is database error (if any) or empty string if all OK.
             // Third:  reference to DOM object where built table is to be stored. 
-            buildTable(obj.webUserList, obj.dbError, dataList);
+            buildTable(obj.flavorList, obj.dbError, dataList);
         }
     };
     
@@ -251,11 +238,12 @@ var assocCRUD = {};
             console.log("Ajax call was successful.");
             document.getElementById("content").innerHTML = httpRequest.responseText;
 
-            ajaxCall("webAPIs/getFlavorAPI.jsp", setRolePickList, "userRoleIdError");
+            ajaxCall("webAPIs/getFlavorAPI.jsp", setFlavorList, "flavor_idError");
+            ajaxCall("webAPIs/getStoreAPI.jsp", setStoreList, "storeError");
 
-            function setRolePickList(httpRequest) {
+            function setFlavorList(httpRequest) {
 
-                console.log("setRolePickList was called, see next line for object holding list of roles");
+                console.log("getFlavorAPI was called, see next line for object holding list of flavors");
                 var jsonObj = JSON.parse(httpRequest.responseText); // convert from JSON to JS Object.
                 console.log(jsonObj);
 
@@ -264,20 +252,21 @@ var assocCRUD = {};
                     return;
                 }
 
-                /*  copy/pasting the first entry from the output of my get role API
-                 * 
-                 {
-                 "dbError": "",
-                 "roleList": [
-                 {
-                 "userRoleId": "1",
-                 "userRoleType": "Admin",
-                 "errorMsg": ""
-                 },
-                 */
+                makePickList(jsonObj.flavorList, "flavor_id", "flavor_name", "flavorPickList");
+            }
+            
+            function setStoreList(httpRequest) {
 
-                // function makePickList(list, keyProp, valueProp, selectListId) {
-                makePickList(jsonObj.WebUserList, "userRoleId", "userRoleType", "flavorPickList");
+                console.log("getStoreAPI was called, see next line for object holding list of stores");
+                var jsonObj = JSON.parse(httpRequest.responseText); // convert from JSON to JS Object.
+                console.log(jsonObj);
+
+                if (jsonObj.dbError.length > 0) {
+                    document.getElementById("falvor_idError").innerHTML = jsonObj.dbError;
+                    return;
+                }
+
+                makePickList(jsonObj.flavorList, "web_user_id", "store_name", "storePickList");
             }
         }
     };

@@ -214,11 +214,11 @@ var assocCRUD = {};
                 return;
             }
 
-            for (var i = 0; i < obj.flavorList.length; i++) {
-
-                // remove a property from each object in webUserList 
-                delete obj.flavorList[i].userPassword2;
-            }
+//            for (var i = 0; i < obj.flavorList.length; i++) {
+//
+//                // remove a property from each object in webUserList 
+//                delete obj.flavorList[i].userPassword2;
+//            }
 
             // buildTable Parameters: 
             // First:  array of objects that are to be built into an HTML table.
@@ -262,11 +262,11 @@ var assocCRUD = {};
                 console.log(jsonObj);
 
                 if (jsonObj.dbError.length > 0) {
-                    document.getElementById("falvor_idError").innerHTML = jsonObj.dbError;
+                    document.getElementById("storeError").innerHTML = jsonObj.dbError;
                     return;
                 }
 
-                makePickList(jsonObj.flavorList, "web_user_id", "store_name", "storePickList");
+                makePickList(jsonObj.webUserList, "web_user_id", "userEmail", "storePickList");
             }
         }
     };
@@ -276,30 +276,32 @@ var assocCRUD = {};
 
         console.log ("assocCRUD.insertSave was called");
 
-        var ddList = document.getElementById("rolePickList");
+        var fList = document.getElementById("flavorPickList");
+        var sList = document.getElementById("storePickList");
 
         // create a user object from the values that the user has typed into the page.
-        var userInputObj = {
-            "webUserId": "",
-            "userEmail": document.getElementById("userEmail").value,
-            "userPassword": document.getElementById("userPassword").value,
-            "userPassword2": document.getElementById("userPassword2").value,
-            "birthday": document.getElementById("birthday").value,
-            "membershipFee": document.getElementById("membershipFee").value,
+        var assocInputObj = {
+            "supply_id": "",
+            "selling_price": document.getElementById("selling_price").value,
+            "special_additions": document.getElementById("special_additions").value,
+            
+            
+            "flavor_id": fList.options[fList.selectedIndex].value,
+            "web_user_id": sList.options[sList.selectedIndex].value,
 
             // Modification here for role pick list
-            "userRoleId": ddList.options[ddList.selectedIndex].value,
 
-            "userRoleType": "",
+            "flavor_name": "",
+            "store_name": "",
             "errorMsg": ""
         };
-        console.log(userInputObj);
+        console.log(assocInputObj);
 
         // build the url for the ajax call. Remember to escape the user input object or else 
         // you'll get a security error from the server. JSON.stringify converts the javaScript
         // object into JSON format (the reverse operation of what gson does on the server side).
-        var myData = escape(JSON.stringify(userInputObj));
-        var url = "webAPIs/insertUserAPI.jsp?jsonData=" + myData;
+        var myData = escape(JSON.stringify(assocInputObj));
+        var url = "webAPIs/insertAssocAPI.jsp?jsonData=" + myData;
         ajaxCall(url, processInsert, "recordError");
 
         function processInsert(httpRequest) {
@@ -313,12 +315,10 @@ var assocCRUD = {};
             console.log("here is JSON object (holds error messages.");
             console.log(jsonObj);
 
-            document.getElementById("userEmailError").innerHTML = jsonObj.userEmail;
-            document.getElementById("userPasswordError").innerHTML = jsonObj.userPassword;
-            document.getElementById("userPassword2Error").innerHTML = jsonObj.userPassword2;
-            document.getElementById("birthdayError").innerHTML = jsonObj.birthday;
-            document.getElementById("membershipFeeError").innerHTML = jsonObj.membershipFee;
-            document.getElementById("userRoleIdError").innerHTML = jsonObj.userRoleId;
+            document.getElementById("selling_priceError").innerHTML = jsonObj.selling_price;
+            document.getElementById("special_additionsError").innerHTML = jsonObj.special_additions;
+            document.getElementById("flavor_idError").innerHTML = jsonObj.flavor_id;
+            document.getElementById("storeError").innerHTML = jsonObj.store_name;
 
             if (jsonObj.errorMsg.length === 0) { // success
                 jsonObj.errorMsg = "Record successfully inserted !!!";
@@ -350,11 +350,11 @@ var assocCRUD = {};
                 return;
             }
 
-            for (var i = 0; i < obj.webUserList.length; i++) {
-
-                // remove a property from each object in webUserList 
-                delete obj.webUserList[i].userPassword2;
-            }
+//            for (var i = 0; i < obj.webUserList.length; i++) {
+//
+//                // remove a property from each object in webUserList 
+//                delete obj.webUserList[i].userPassword2;
+//            }
 
             // buildTable Parameters: 
             // First:  array of objects that are to be built into an HTML table.

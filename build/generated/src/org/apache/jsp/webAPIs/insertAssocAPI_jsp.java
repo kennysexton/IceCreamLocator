@@ -4,10 +4,10 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
 import dbUtils.DbConn;
-import model.Other.*;
+import model.Assoc.*;
 import com.google.gson.*;
 
-public final class insertUserAPI_jsp extends org.apache.jasper.runtime.HttpJspBase
+public final class insertAssocAPI_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
 
   private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();
@@ -72,7 +72,7 @@ public final class insertUserAPI_jsp extends org.apache.jasper.runtime.HttpJspBa
         System.out.println("jsonInsertData is " + jsonInsertData);
         errorMsgs.errorMsg = dbc.getErr();
         if (errorMsgs.errorMsg.length() == 0) { // means db connection is ok
-            System.out.println("personInsert.jsp ready to insert");
+            System.out.println("supplyInsert.jsp ready to insert");
             
             // Must use gson to convert JSON (that the user provided as part of the url, the jsonInsertData. 
             // Convert from JSON (JS object notation) to POJO (plain old java object).

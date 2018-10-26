@@ -23,7 +23,8 @@ public class StringData {
     public String membershipFee = "";
     public String userRoleId = "";   // Foreign Key
     public String userRoleType = ""; // getting it from joined user_role table.
-
+    public String store_name = "";
+    
     public String errorMsg = "";
     
 
@@ -41,6 +42,7 @@ public class StringData {
             this.membershipFee = FormatUtils.formatDollar(results.getObject("membership_fee"));
             this.userRoleId = FormatUtils.formatInteger(results.getObject("web_user.user_role_id"));
             this.userRoleType = FormatUtils.formatString(results.getObject("user_role_type"));
+            this.store_name = FormatUtils.formatString(results.getObject("store_name"));
         } catch (Exception e) {
             this.errorMsg = "Exception thrown in model.webUser.StringData (the constructor that takes a ResultSet): " + e.getMessage();
         }
@@ -48,7 +50,7 @@ public class StringData {
 
     public int getCharacterCount() {
         String s = this.webUserId + this.userEmail + this.userPassword + this.birthday
-                + this.membershipFee + this.userRoleId + this.userRoleType;
+                + this.membershipFee + this.userRoleId + this.userRoleType + this.store_name;
         return s.length();
     }
 
@@ -59,6 +61,7 @@ public class StringData {
                 + ", Birthday: " + this.birthday
                 + ", Membership Fee: " + this.membershipFee
                 + ", User Role Id: " + this.userRoleId
-                + ", User Role Type: " + this.userRoleType;
+                + ", User Role Type: " + this.userRoleType
+                + ", Store Name: " + this.store_name;
     }
 }

@@ -64,7 +64,7 @@ public final class listUsersAPI_jsp extends org.apache.jasper.runtime.HttpJspBas
     if (strDataList.dbError.length() == 0) { // if got good DB connection, 
         try {
             String sql = "SELECT web_user_id, user_email, user_password, membership_fee, birthday, "
-                    + "web_user.user_role_id, user_role_type "
+                    + "web_user.user_role_id, user_role_type, store_name "
                     + "FROM web_user, user_role where web_user.user_role_id = user_role.user_role_id "
                     + "ORDER BY web_user_id ";
 

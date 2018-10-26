@@ -2,6 +2,7 @@ package model.Assoc;
 
 import model.Assoc.*;
 import dbUtils.FormatUtils;
+import dbUtils.ValidationUtils;
 import java.sql.ResultSet;
 
 
@@ -22,6 +23,8 @@ public class StringData {
     public String flavor_name = "";
     public String store_name = "";
     public String errorMsg = "";
+    public String flavor_id = "";  // used for insert
+    public String web_user_id = ""; // used for insert
 
     // default constructor leaves all data members with empty string (Nothing null).
     public StringData() {

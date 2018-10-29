@@ -35,7 +35,7 @@
                         <a onclick = "ajaxCall('htmlPartials/logonContent.html', setContent, setError)">Log on</a><br/>
                         <a onclick = "ajaxCall('webAPIs/logoffAPI.jsp', setUserContent, setError)">Log off</a><br/>
                         <a onclick = "ajaxCall('webAPIs/getProfileAPI.jsp', setUserContent, setError)">Profile</a><br>
-                        <a onclick = "ajaxCall('htmlPartials/insertUpdateUser.html', setContent, setError)">Register</a>
+                        <a onclick = 'userCRUD.startInsert()'>Register</a>
                     </div>
                 </div>
              </div>

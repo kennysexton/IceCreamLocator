@@ -19,10 +19,10 @@ public class DbMods {
     
         // Validation
         errorMsgs.flavor_name = ValidationUtils.stringValidationMsg(inputData.flavor_name, 45, true);
-        errorMsgs.date_added = ValidationUtils.stringValidationMsg(inputData.date_added, 45, false);
+        errorMsgs.date_added = ValidationUtils.dateValidationMsg(inputData.date_added,  false);
 
 
-        errorMsgs.flavor_color = ValidationUtils.dateValidationMsg(inputData.flavor_color, false);
+        errorMsgs.flavor_color = ValidationUtils.stringValidationMsg(inputData.flavor_color, 45, false);
 
         return errorMsgs;
     } // validate 

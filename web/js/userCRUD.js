@@ -63,30 +63,30 @@ var assocCRUD = {};
         // object into JSON format (the reverse operation of what gson does on the server side).
         var myData = escape(JSON.stringify(userInputObj));
         var url = "webAPIs/insertUserAPI.jsp?jsonData=" + myData;
-        ajaxCall(url, processInsert, "recordError");
+        ajaxCall(url, userProcessInsert, "recordError");
 
-        function processInsert(httpRequest) {
-            console.log("processInsert was called here is httpRequest.");
+        function userProcessInsert(httpRequest) {
+            console.log("user processInsert was called here is httpRequest.");
             console.log(httpRequest);
 
             // the server prints out a JSON string of an object that holds field level error 
             // messages. The error message object (conveniently) has its fiels named exactly 
             // the same as the input data was named. 
-            var jsonObj = JSON.parse(httpRequest.responseText); // convert from JSON to JS Object.
-            console.log("here is JSON object (holds error messages.");
-            console.log(jsonObj);
+            var jsonObju = JSON.parse(httpRequest.responseText); // convert from JSON to JS Object.
+            console.log("here is JSON u object (holds error messages.");
+            console.log(jsonObju);
 
-            document.getElementById("userEmailError").innerHTML = jsonObj.userEmail;
-            document.getElementById("userPasswordError").innerHTML = jsonObj.userPassword;
-            document.getElementById("userPassword2Error").innerHTML = jsonObj.userPassword2;
-            document.getElementById("birthdayError").innerHTML = jsonObj.birthday;
-            document.getElementById("membershipFeeError").innerHTML = jsonObj.membershipFee;
-            document.getElementById("userRoleIdError").innerHTML = jsonObj.userRoleId;
+            document.getElementById("userEmailError").innerHTML = jsonObju.userEmail;
+            document.getElementById("userPasswordError").innerHTML = jsonObju.userPassword;
+            document.getElementById("userPassword2Error").innerHTML = jsonObju.userPassword2;
+            document.getElementById("birthdayError").innerHTML = jsonObju.birthday;
+            document.getElementById("membershipFeeError").innerHTML = jsonObju.membershipFee;
+            document.getElementById("userRoleIdError").innerHTML = jsonObju.userRoleId;
 
-            if (jsonObj.errorMsg.length === 0) { // success
-                jsonObj.errorMsg = "Record successfully inserted !!!";
+            if (jsonObju.errorMsg.length === 0) { // success
+                jsonObju.errorMsg = "Record successfully inserted !!!";
             }
-            document.getElementById("recordError").innerHTML = jsonObj.errorMsg;
+            document.getElementById("recordError").innerHTML = jsonObju.errorMsg;
         }
     };
 
@@ -126,7 +126,7 @@ var assocCRUD = {};
             buildTable(obj.webUserList, obj.dbError, dataList);
         }
     };
-    
+
     
     // Other
     otherCRUD.startInsert = function () {
@@ -165,10 +165,10 @@ var assocCRUD = {};
         // object into JSON format (the reverse operation of what gson does on the server side).
         var myData = escape(JSON.stringify(otherInputObj));
         var url = "webAPIs/insertOtherAPI.jsp?jsonData=" + myData;
-        ajaxCall(url, processInsert, "recordError");
+        ajaxCall(url, otherProcessInsert, "recordError");
 
-        function processInsert(httpRequest) {
-            console.log("processInsert was called here is httpRequest.");
+        function otherProcessInsert(httpRequest) {
+            console.log("other processInsert was called here is httpRequest.");
             console.log(httpRequest);
 
             // the server prints out a JSON string of an object that holds field level error 
@@ -302,10 +302,10 @@ var assocCRUD = {};
         // object into JSON format (the reverse operation of what gson does on the server side).
         var myData = escape(JSON.stringify(assocInputObj));
         var url = "webAPIs/insertAssocAPI.jsp?jsonData=" + myData;
-        ajaxCall(url, processInsert, "recordError");
+        ajaxCall(url, assocProcessInsert, "recordError");
 
-        function processInsert(httpRequest) {
-            console.log("processInsert was called here is httpRequest.");
+        function assocProcessInsert(httpRequest) {
+            console.log("assoc processInsert was called here is httpRequest.");
             console.log(httpRequest);
 
             // the server prints out a JSON string of an object that holds field level error 

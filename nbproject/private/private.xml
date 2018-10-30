@@ -3,11 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Kenny/Coding/CIS%203308/Ice%20Cream%20Locator/src/java/model/webUser/StringDataList.java</file>
+            <file>file:/C:/Users/Kenny/Coding/CIS%203308/Ice%20Cream%20Locator/src/java/model/webUser/StringData.java</file>
+            <file>file:/C:/Users/Kenny/Coding/CIS%203308/Ice%20Cream%20Locator/web/webAPIs/getStoreAPI.jsp</file>
+            <file>file:/C:/Users/Kenny/Coding/CIS%203308/Ice%20Cream%20Locator/web/webAPIs/insertOtherAPI.jsp</file>
             <file>file:/C:/Users/Kenny/Coding/CIS%203308/Ice%20Cream%20Locator/src/java/view/StoreView.java</file>
             <file>file:/C:/Users/Kenny/Coding/CIS%203308/Ice%20Cream%20Locator/src/java/model/webUser/DbMods.java</file>
             <file>file:/C:/Users/Kenny/Coding/CIS%203308/Ice%20Cream%20Locator/web/js/userCRUD.js</file>
-            <file>file:/C:/Users/Kenny/Coding/CIS%203308/Ice%20Cream%20Locator/src/java/model/Assoc/StringDataList.java</file>
+            <file>file:/C:/Users/Kenny/Coding/CIS%203308/Ice%20Cream%20Locator/src/java/model/Assoc/DbMods.java</file>
+            <file>file:/C:/Users/Kenny/Coding/CIS%203308/Ice%20Cream%20Locator/src/java/view/WebUserView.java</file>
         </group>
     </open-files>
 </project-private>

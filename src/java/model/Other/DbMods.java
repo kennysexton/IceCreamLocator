@@ -37,12 +37,7 @@ public class DbMods {
 
         } else { // all fields passed validation
 
-            /*
-                       String sql = "SELECT web_user_id, user_email, user_password, membership_fee, birthday, "+
-                    "web_user.user_role_id, user_role_type "+
-                    "FROM web_user, user_role where web_user.user_role_id = user_role.user_role_id " + 
-                    "ORDER BY web_user_id ";
-             */
+           
             // Start preparing SQL statement
             String sql = "INSERT INTO flavor (flavor_name, date_added, flavor_color) "
                     + "values (?,?,?)";
@@ -77,5 +72,43 @@ public class DbMods {
         } // customerId is not null and not empty string.
         return errorMsgs;
     } // insert
+    
+        public static String delete(String flavor_id, DbConn dbc) {
+
+        if (flavor_id == null) {
+            return "Programmer error: cannot attempt to delete flavor record that matches null flavor_id";
+        }
+
+        // This method assumes that the calling Web API (JSP page) has already confirmed 
+        // that the database connection is OK. BUT if not, some reasonable exception should 
+        // be thrown by the DB and passed back anyway... 
+        String result = ""; // empty string result means the delete worked fine.
+        try {
+
+            String sql = "DELETE FROM flavor WHERE flavor_id = ?";
+
+            // This line compiles the SQL statement (checking for syntax errors against your DB).
+            PreparedStatement pStatement = dbc.getConn().prepareStatement(sql);
+
+            // Encode user data into the prepared statement.
+            pStatement.setString(1, flavor_id);
+
+            int numRowsDeleted = pStatement.executeUpdate();
+
+            if (numRowsDeleted == 0) {
+                result = "Programmer Error: did not delete the record with web_user_id " + flavor_id;
+            } else if (numRowsDeleted > 1) {
+                result = "Programmer Error: > 1 record deleted. Did you forget the WHERE clause?";
+            }
+
+        } catch (Exception e) {
+            result = "Exception thrown in model.Other.DbMods.delete(): " + e.getMessage();
+            if (result.contains("foreign key")) {
+                result = "Cannot delete flavor " + flavor_id + " because that user already posted reviews.";
+            }
+        }
+
+        return result;
+    } // delete
     
 } // class

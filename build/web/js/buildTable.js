@@ -15,6 +15,13 @@ function buildTable(list, dbErrorMsg, target) {
             cell.style.textAlign = "right";
             console.log("right alligning " + cellContent);
         }
+        
+        // if the cell contains a single image (like icon), center it.
+        var imgList = cell.getElementsByTagName("img");
+        if (imgList.length === 1) {
+            cell.style.textAlign = "center";
+        }
+        
     } // end function alignCell
 
 // Make column heading pretty. (The column heading name is probably coming from a java property field name.) 

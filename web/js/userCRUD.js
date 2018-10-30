@@ -1,7 +1,5 @@
-
 var userCRUD = {}; // globally available object
-var otherCRUD = {};
-var assocCRUD = {};
+
 
 (function () {  // This is an IIFE, an Immediately Invoked Function Expression
     //alert("I am an IIFE!");
@@ -89,6 +87,40 @@ var assocCRUD = {};
             document.getElementById("recordError").innerHTML = jsonObju.errorMsg;
         }
     };
+    
+    userCRUD.delete = function (userId, icon) {
+        // clear out any old error msg (non-breaking space)
+        document.getElementById("listMsg").innerHTML = "&nbsp;";
+
+        if (confirm("Do you really want to delete user " + userId + "? ")) {
+
+            // Calling the DELETE API. 
+            var url = "webAPIs/deleteUserAPI.jsp?deleteId=" + userId;
+            ajaxCall(url, success, "listMsg");
+
+            function success(http) { // API was successfully called (doesnt mean delete worked)
+                var obj = JSON.parse(http.responseText);
+                console.log("delete API called with success. next line has the object returned.");
+                console.log(obj);
+                if (obj.errorMsg.length > 0) {
+                    document.getElementById("listMsg").innerHTML = obj.errorMsg;
+                } else { // everything good, no error means record was deleted
+
+                    // delete the <tr> (row) of the clicked icon from the HTML table
+                    console.log("icon that was passed into JS function is printed on next line");
+                    console.log(icon);
+
+                    // icon's parent is cell whose parent is row 
+                    var dataRow = icon.parentNode.parentNode;
+                    var rowIndex = dataRow.rowIndex - 1; // adjust for oolumn header row?
+                    var dataTable = dataRow.parentNode;
+                    dataTable.deleteRow(rowIndex);
+
+                    document.getElementById("listMsg").innerHTML = "Web User "+userId+ " deleted.";
+                }
+            }
+        }
+    };
 
 
     userCRUD.list = function () {
@@ -96,7 +128,8 @@ var assocCRUD = {};
         document.getElementById("content").innerHTML = "";
         var dataList = document.createElement("div");
         dataList.id = "dataList"; // set the id so it matches CSS styling rule.
-        dataList.innerHTML = "<h2>Web Users <img src='icons/insert.png' onclick='userCRUD.startInsert();'/></h2>";
+        dataList.innerHTML = "<h2>Web Users <img src='icons/insert.png' onclick='userCRUD.startInsert();'/></h2>" +
+                "<div id='listMsg'>&nbsp;</div>";
         document.getElementById("content").appendChild(dataList);
 
         ajaxCall('webAPIs/listUsersAPI.jsp', setListUI, 'dataList');
@@ -115,7 +148,9 @@ var assocCRUD = {};
 
             for (var i = 0; i < obj.webUserList.length; i++) {
 
-                // remove a property from each object in webUserList 
+                // remove a property from each object in webUserList
+                var id = obj.webUserList[i].webUserId;
+                obj.webUserList[i].delete = "<img src='icons/delete.png'  onclick='userCRUD.delete(" + id + ",this)'  />";
                 delete obj.webUserList[i].userPassword2;
             }
 
@@ -126,242 +161,4 @@ var assocCRUD = {};
             buildTable(obj.webUserList, obj.dbError, dataList);
         }
     };
-
-    
-    // Other
-    otherCRUD.startInsert = function () {
-
-        ajaxCall('htmlPartials/insertOther.html', setInsertUI, 'content');
-
-        function setInsertUI(httpRequest) {
-
-            // Place the inserttUser html snippet into the content area.
-            console.log("Ajax call was successful.");
-            document.getElementById("content").innerHTML = httpRequest.responseText;
-
-        }
-    };
-
-
-    otherCRUD.insertSave = function () {
-
-        console.log ("otherCRUD.insertSave was called");
-
-        //var ddList = document.getElementById("rolePickList");
-
-        // create a user object from the values that the user has typed into the page.
-        var otherInputObj = {
-            "flavor_id": "",
-            "flavor_name": document.getElementById("flavor_name").value,
-            "date_added": document.getElementById("date_added").value,
-            "flavor_color": document.getElementById("flavor_color").value,
-            
-            "errorMsg": ""
-        };
-        console.log(otherInputObj);
-
-        // build the url for the ajax call. Remember to escape the user input object or else 
-        // you'll get a security error from the server. JSON.stringify converts the javaScript
-        // object into JSON format (the reverse operation of what gson does on the server side).
-        var myData = escape(JSON.stringify(otherInputObj));
-        var url = "webAPIs/insertOtherAPI.jsp?jsonData=" + myData;
-        ajaxCall(url, otherProcessInsert, "recordError");
-
-        function otherProcessInsert(httpRequest) {
-            console.log("other processInsert was called here is httpRequest.");
-            console.log(httpRequest);
-
-            // the server prints out a JSON string of an object that holds field level error 
-            // messages. The error message object (conveniently) has its fiels named exactly 
-            // the same as the input data was named. 
-            var jsonObj = JSON.parse(httpRequest.responseText); // convert from JSON to JS Object.
-            console.log("here is JSON object (holds error messages.");
-            console.log(jsonObj);
-            console.log(jsonObj.flavor_name);
-
-            document.getElementById("flavor_nameError").innerHTML = jsonObj.flavor_name;
-            document.getElementById("date_addedError").innerHTML = jsonObj.date_added;
-            document.getElementById("flavor_colorError").innerHTML = jsonObj.flavor_color;
-            
-
-            if (jsonObj.errorMsg.length === 0) { // success
-                jsonObj.errorMsg = "Record successfully inserted !!!";
-            }
-            document.getElementById("recordError2").innerHTML = jsonObj.errorMsg;
-        }
-    };
-
-
-    otherCRUD.list = function () {
-
-        document.getElementById("content").innerHTML = "";
-        var dataList = document.createElement("div");
-        dataList.id = "dataList"; // set the id so it matches CSS styling rule.
-        dataList.innerHTML = "<h2>Flavors <img src='icons/insert.png' onclick='otherCRUD.startInsert();'/></h2>";
-        document.getElementById("content").appendChild(dataList);
-
-        ajaxCall('webAPIs/listOtherAPI.jsp', setListUI, 'dataList');
-
-        function setListUI(httpRequest) {
-
-            console.log("starting otherCRUD.list (setListUI) with this httpRequest object (next line)");
-            console.log(httpRequest);
-
-            var obj = JSON.parse(httpRequest.responseText);
-
-            if (obj === null) {
-                dataList.innerHTML = "listUsersResponse Error: JSON string evaluated to null.";
-                return;
-            }
-
-//            for (var i = 0; i < obj.flavorList.length; i++) {
-//
-//                // remove a property from each object in webUserList 
-//                delete obj.flavorList[i].userPassword2;
-//            }
-
-            // buildTable Parameters: 
-            // First:  array of objects that are to be built into an HTML table.
-            // Second: string that is database error (if any) or empty string if all OK.
-            // Third:  reference to DOM object where built table is to be stored. 
-            buildTable(obj.flavorList, obj.dbError, dataList);
-        }
-    };
-    
-    assocCRUD.startInsert = function () {
-
-        ajaxCall('htmlPartials/insertAssoc.html', setInsertUI, 'content');
-
-        function setInsertUI(httpRequest) {
-
-            // Place the inserttUser html snippet into the content area.
-            console.log("Ajax call was successful.");
-            document.getElementById("content").innerHTML = httpRequest.responseText;
-
-            ajaxCall("webAPIs/getFlavorAPI.jsp", setFlavorList, "flavor_idError");
-            ajaxCall("webAPIs/getStoreAPI.jsp", setStoreList, "storeError");
-
-            function setFlavorList(httpRequest) {
-
-                console.log("getFlavorAPI was called, see next line for object holding list of flavors");
-                var jsonObj = JSON.parse(httpRequest.responseText); // convert from JSON to JS Object.
-                console.log(jsonObj);
-
-                if (jsonObj.dbError.length > 0) {
-                    document.getElementById("falvor_idError").innerHTML = jsonObj.dbError;
-                    return;
-                }
-
-                makePickList(jsonObj.flavorList, "flavor_id", "flavor_name", "flavorPickList");
-            }
-            
-            function setStoreList(httpRequest) {
-
-                console.log("getStoreAPI was called, see next line for object holding list of stores");
-                var jsonObj = JSON.parse(httpRequest.responseText); // convert from JSON to JS Object.
-                console.log(jsonObj);
-
-                if (jsonObj.dbError.length > 0) {
-                    document.getElementById("storeError").innerHTML = jsonObj.dbError;
-                    return;
-                }
-
-                makePickList(jsonObj.webUserList, "web_user_id", "userEmail", "storePickList");
-            }
-        }
-    };
-
-
-    assocCRUD.insertSave = function () {
-
-        console.log ("assocCRUD.insertSave was called");
-
-        var fList = document.getElementById("flavorPickList");
-        var sList = document.getElementById("storePickList");
-
-        // create a user object from the values that the user has typed into the page.
-        var assocInputObj = {
-            "supply_id": "",
-            "selling_price": document.getElementById("selling_price").value,
-            "special_additions": document.getElementById("special_additions").value,
-            
-            
-            "flavor_id": fList.options[fList.selectedIndex].value,
-            "web_user_id": sList.options[sList.selectedIndex].value,
-
-            // Modification here for role pick list
-
-            "flavor_name": "",
-            "store_name": "",
-            "errorMsg": ""
-        };
-        console.log(assocInputObj);
-
-        // build the url for the ajax call. Remember to escape the user input object or else 
-        // you'll get a security error from the server. JSON.stringify converts the javaScript
-        // object into JSON format (the reverse operation of what gson does on the server side).
-        var myData = escape(JSON.stringify(assocInputObj));
-        var url = "webAPIs/insertAssocAPI.jsp?jsonData=" + myData;
-        ajaxCall(url, assocProcessInsert, "recordError");
-
-        function assocProcessInsert(httpRequest) {
-            console.log("assoc processInsert was called here is httpRequest.");
-            console.log(httpRequest);
-
-            // the server prints out a JSON string of an object that holds field level error 
-            // messages. The error message object (conveniently) has its fiels named exactly 
-            // the same as the input data was named. 
-            var jsonObj = JSON.parse(httpRequest.responseText); // convert from JSON to JS Object.
-            console.log("here is JSON object (holds error messages.");
-            console.log(jsonObj);
-
-            document.getElementById("selling_priceError").innerHTML = jsonObj.selling_price;
-            document.getElementById("special_additionsError").innerHTML = jsonObj.special_additions;
-            document.getElementById("flavor_idError").innerHTML = jsonObj.flavor_id;
-            document.getElementById("storeError").innerHTML = jsonObj.store_name;
-
-            if (jsonObj.errorMsg.length === 0) { // success
-                jsonObj.errorMsg = "Record successfully inserted !!!";
-            }
-            document.getElementById("recordError").innerHTML = jsonObj.errorMsg;
-        }
-    };
-
-
-    assocCRUD.list = function () {
-
-        document.getElementById("content").innerHTML = "";
-        var dataList = document.createElement("div");
-        dataList.id = "dataList"; // set the id so it matches CSS styling rule.
-        dataList.innerHTML = "<h2>Supply <img src='icons/insert.png' onclick='assocCRUD.startInsert();'/></h2>";
-        document.getElementById("content").appendChild(dataList);
-
-        ajaxCall('webAPIs/listAssocAPI.jsp', setListUI, 'dataList');
-
-        function setListUI(httpRequest) {
-
-            console.log("starting assocCRUD.list (setListUI) with this httpRequest object (next line)");
-            console.log(httpRequest);
-
-            var obj = JSON.parse(httpRequest.responseText);
-
-            if (obj === null) {
-                dataList.innerHTML = "listUsersResponse Error: JSON string evaluated to null.";
-                return;
-            }
-
-//            for (var i = 0; i < obj.webUserList.length; i++) {
-//
-//                // remove a property from each object in webUserList 
-//                delete obj.webUserList[i].userPassword2;
-//            }
-
-            // buildTable Parameters: 
-            // First:  array of objects that are to be built into an HTML table.
-            // Second: string that is database error (if any) or empty string if all OK.
-            // Third:  reference to DOM object where built table is to be stored. 
-            buildTable(obj.webUserList, obj.dbError, dataList);
-        }
-    };
-
 }());  // the end of the IIFE

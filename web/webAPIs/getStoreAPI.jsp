@@ -1,7 +1,7 @@
 <%@page contentType="application/json; charset=UTF-8" pageEncoding="UTF-8"%> 
 
 <%@page language="java" import="dbUtils.*" %>
-<%@page language="java" import="model.webUser.*" %>  
+<%@page language="java" import="model.Assoc.*" %>  
 <%@page language="java" import="view.StoreView" %> 
 <%@page language="java" import="com.google.gson.*" %>
 

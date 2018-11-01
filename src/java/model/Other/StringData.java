@@ -51,6 +51,5 @@ public class StringData {
                 + ", flavor_name: " + this.flavor_name
                 + ", date_added: " + this.date_added
                 + ", flavor_color: " + this.flavor_color;
-
     }
 }

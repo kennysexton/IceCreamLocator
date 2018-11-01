@@ -7,25 +7,11 @@ import java.sql.ResultSet;
 
 public class DbMods {
 
-    /*
-    Returns a "StringData" object that is full of field level validation
-    error messages (or it is full of all empty strings if inputData
-    totally passed validation.  
-     */
+  
     private static StringData validate(StringData inputData) {
 
         StringData errorMsgs = new StringData();
 
-        /* Useful to copy field names from StringData as a reference
-    public String webUserId = "";
-    public String userEmail = "";
-    public String userPassword = "";
-    public String userPassword2 = "";
-    public String birthday = "";
-    public String membershipFee = "";
-    public String userRoleId = "";   // Foreign Key
-    public String userRoleType = ""; // getting it from joined user_role table.
-         */
         // Validation
         errorMsgs.selling_price = ValidationUtils.stringValidationMsg(inputData.selling_price, 45, true);
         errorMsgs.special_additions = ValidationUtils.stringValidationMsg(inputData.special_additions, 45, false);
@@ -52,9 +38,7 @@ public class DbMods {
             String sql = "INSERT INTO supply (selling_price, special_additions, flavor_id, web_user_id) "
                     + "values (?,?,?,?)";
 
-            // PrepStatement is Sally's wrapper class for java.sql.PreparedStatement
-            // Only difference is that Sally's class takes care of encoding null 
-            // when necessary. And it also System.out.prints exception error messages.
+            
             PrepStatement pStatement = new PrepStatement(dbc, sql);
 
             // Encode string values into the prepared statement (wrapper class).
@@ -84,5 +68,43 @@ public class DbMods {
         } // customerId is not null and not empty string.
         return errorMsgs;
     } // insert
+    
+    public static String delete(String supply_id, DbConn dbc) {
+
+        if (supply_id == null) {
+            return "Programmer error: cannot attempt to delete supply record that matches null supply_id";
+        }
+
+        // This method assumes that the calling Web API (JSP page) has already confirmed 
+        // that the database connection is OK. BUT if not, some reasonable exception should 
+        // be thrown by the DB and passed back anyway... 
+        String result = ""; // empty string result means the delete worked fine.
+        try {
+
+            String sql = "DELETE FROM supply WHERE supply_id = ?";
+
+            // This line compiles the SQL statement (checking for syntax errors against your DB).
+            PreparedStatement pStatement = dbc.getConn().prepareStatement(sql);
+
+            // Encode user data into the prepared statement.
+            pStatement.setString(1, supply_id);
+
+            int numRowsDeleted = pStatement.executeUpdate();
+
+            if (numRowsDeleted == 0) {
+                result = "Programmer Error: did not delete the record with supply_id " + supply_id;
+            } else if (numRowsDeleted > 1) {
+                result = "Programmer Error: > 1 record deleted. Did you forget the WHERE clause?";
+            }
+
+        } catch (Exception e) {
+            result = "Exception thrown in model.Assoc.DbMods.delete(): " + e.getMessage();
+            if (result.contains("foreign key")) {
+                result = "Cannot delete supply " + supply_id;
+            }
+        }
+
+        return result;
+    } // delete
     
 } // class

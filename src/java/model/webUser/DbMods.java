@@ -42,12 +42,7 @@ public class DbMods {
 
         } else { // all fields passed validation
 
-            /*
-                       String sql = "SELECT web_user_id, user_email, user_password, membership_fee, birthday, "+
-                    "web_user.user_role_id, user_role_type "+
-                    "FROM web_user, user_role where web_user.user_role_id = user_role.user_role_id " + 
-                    "ORDER BY web_user_id ";
-             */
+
             // Start preparing SQL statement
             String sql = "INSERT INTO web_user (user_email, user_password, membership_fee, birthday, user_role_id) "
                     + "values (?,?,?,?,?)";

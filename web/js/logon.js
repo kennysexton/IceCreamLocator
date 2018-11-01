@@ -13,15 +13,13 @@ function logonFn (emailId, pwId, msgId) {
         if (obj.webUserList.length === 0) {
             msg += "Not a valid account: " + obj.errorMsg;
         } else {
-            msg += "<br/>Welcome Web User number " + obj.webUserList[0].webUserId;
+            msg += "<br/>Welcome Web User number " + obj.webUserList[0].web_user_id;
             msg += "<br/> &nbsp; with Birthday: " + obj.webUserList[0].birthday;
             msg += "<br/> &nbsp; and MembershipFee: " + obj.webUserList[0].membershipFee;
             msg += "<br/> &nbsp; and User Role Id: " + obj.webUserList[0].userRoleId;
             msg += "<br/> &nbsp; and User Role: " + obj.webUserList[0].userRoleType;
         }
-        /* I like to copy/paste the JSON code (below) so that I do not misspell any property names (above):
-        "webUserId": "110", "userEmail": "bri", "userPassword": "no", "birthday": "",
-        "membershipFee": "", "userRoleId": "1", "userRoleType": "Admin", "errorMsg": "" */
+        
         document.getElementById(msgId).innerHTML = msg;
     }
     function processHttpError(httpRequest) { // this fn is also private/local to logonFn, good coding style

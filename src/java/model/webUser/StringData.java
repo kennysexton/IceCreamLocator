@@ -15,7 +15,7 @@ import java.sql.ResultSet;
  * free access to put data in or take it out. */
 public class StringData {
 
-    public String webUserId = "";
+    public String web_user_id = "";
     public String userEmail = "";
     public String userPassword = "";
     public String userPassword2 = "";
@@ -35,7 +35,7 @@ public class StringData {
     // overloaded constructor sets all data members by extracting from resultSet.
     public StringData(ResultSet results) {
         try {
-            this.webUserId = FormatUtils.formatInteger(results.getObject("web_user_id"));
+            this.web_user_id = FormatUtils.formatInteger(results.getObject("web_user_id"));
             this.userEmail = FormatUtils.formatString(results.getObject("user_email"));
             this.store_name = FormatUtils.formatString(results.getObject("store_name"));
             this.userPassword = FormatUtils.formatString(results.getObject("user_password"));
@@ -50,13 +50,13 @@ public class StringData {
     }
 
     public int getCharacterCount() {
-        String s = this.webUserId + this.userEmail + this.userPassword + this.birthday
+        String s = this.web_user_id + this.userEmail + this.userPassword + this.birthday
                 + this.membershipFee + this.userRoleId + this.userRoleType + this.store_name;
         return s.length();
     }
 
     public String toString() {
-        return "Web User Id:" + this.webUserId
+        return "Web User Id:" + this.web_user_id
                 + ", User Email: " + this.userEmail
                 + ", User Password: " + this.userPassword
                 + ", Birthday: " + this.birthday

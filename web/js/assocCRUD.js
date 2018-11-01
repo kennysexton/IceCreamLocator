@@ -61,15 +61,16 @@ var assocCRUD = {};
             "special_additions": document.getElementById("special_additions").value,
              
             "flavor_id": fList.options[fList.selectedIndex].value,
-            "web_user_id": 1,
-            //"web_user_id": sList.options[sList.selectedIndex].value, // broken at the momnet
+            //"web_user_id": 1,
+
+            "web_user_id": sList.options[sList.selectedIndex].value, // broken at the momnet
 
             "flavor_name": "",
             "store_name": "",
             "errorMsg": ""
         };
         console.log(assocInputObj);
-
+        console.log(assocInputObj.web_user_id);
         var myData = escape(JSON.stringify(assocInputObj));
         var url = "webAPIs/insertAssocAPI.jsp?jsonData=" + myData;
         ajaxCall(url, assocProcessInsert, "recordError");

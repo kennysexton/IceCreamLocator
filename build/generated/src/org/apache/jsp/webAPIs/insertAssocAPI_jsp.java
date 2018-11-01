@@ -72,7 +72,7 @@ public final class insertAssocAPI_jsp extends org.apache.jasper.runtime.HttpJspB
         System.out.println("jsonInsertData is " + jsonInsertData);
         errorMsgs.errorMsg = dbc.getErr();
         if (errorMsgs.errorMsg.length() == 0) { // means db connection is ok
-            System.out.println("supplyInsert.jsp ready to insert");
+            System.out.println("insertAssocAPI ready to insert");
             
             // Must use gson to convert JSON (that the user provided as part of the url, the jsonInsertData. 
             // Convert from JSON (JS object notation) to POJO (plain old java object).

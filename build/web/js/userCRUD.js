@@ -41,7 +41,7 @@ var userCRUD = {}; // globally available object
 
         // create a user object from the values that the user has typed into the page.
         var userInputObj = {
-            "webUserId": "",
+            "web_user_id": "",
             "userEmail": document.getElementById("userEmail").value,
             "userPassword": document.getElementById("userPassword").value,
             "userPassword2": document.getElementById("userPassword2").value,
@@ -149,7 +149,7 @@ var userCRUD = {}; // globally available object
             for (var i = 0; i < obj.webUserList.length; i++) {
 
                 // remove a property from each object in webUserList
-                var id = obj.webUserList[i].webUserId;
+                var id = obj.webUserList[i].web_user_id;
                 obj.webUserList[i].delete = "<img src='icons/delete.png'  onclick='userCRUD.delete(" + id + ",this)'  />";
                 delete obj.webUserList[i].userPassword2;
             }

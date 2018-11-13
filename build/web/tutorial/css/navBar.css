@@ -1,0 +1,196 @@
+*{
+    font-family: "Montserrat", sans-serif; 
+}
+
+body {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+    /*Dropdown Style*/
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 20px;
+    background-color: #fafafa;
+    min-width: 20px;
+    box-shadow: 1.2px 4px 8px 0px rgba(0,0,0,0.30);
+    z-index: 1;
+}
+.dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 18px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+    
+}
+
+nav a {
+  -webkit-transition: 0.5s;
+  -o-transition: 0.5s;
+  transition: 0.5s;
+}
+
+nav a:hover, a:active, a:focus {
+  text-decoration: none;
+}
+
+.container {
+  max-width: 1140px;
+  position: relative;
+  margin: 0 auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.nav {
+  position: relative;
+  top: 0;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  padding: 30px 0;
+  z-index: 0;
+  
+}
+
+.nav #logo {
+  font-size: 20px;
+  margin: 0;
+  padding: 0;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.nav #logo a {
+  color: #000;
+}
+.nav #logo em {
+  color: #fff;
+}
+
+.nav ul {
+  padding: 0;
+  margin: .4em 0 0 0;
+}
+.nav ul li {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: inline;
+  line-height: 1.5;
+  font-family: "Montserrat", sans-serif;
+}
+.nav ul li > a {
+  text-transform: uppercase;
+  font-size: 13px !important;
+  letter-spacing: .05em;
+}
+.nav ul li a {
+  font-size: 16px;
+  padding: 30px 10px;
+  color: #cccccc;
+  -webkit-transition: 0.5s;
+  -o-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.nav ul li a:hover, .nav ul li a:focus, .nav ul li a:active {
+  color: #000;
+}
+
+.nav ul li.active > a {
+  color: #000 !important;
+}
+
+#mobile-menu {
+    visibility: hidden;
+    position: absolute;
+    left: 88%;
+    padding:6px;
+}
+
+#nav-close {
+    visibility: hidden;
+    position: absolute;
+}
+
+
+/* ----------------------------- Mobile Nav for Tablet and Below ---------------------------------*/
+@media screen and (max-width: 1020px) {
+    
+    #mobile-menu {
+        visibility: visible;
+    }
+    
+    .menu {
+        margin: 2px;
+    }
+	
+    .nav {
+        z-index: 5;
+        padding: 10px 0;
+    }
+	
+    #nav-close{
+        visibility: visible;
+        font-size: 30px;
+        right: 0px;
+        top: 0px
+    }
+
+    .sidebar {
+        height: 100%;
+        width: 0px;
+        position: fixed;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        background-color: #111;
+        overflow-x: hidden;
+        transition: 0.5s;
+        padding-top: 55px;
+    }
+
+    .sidebar a {
+        padding: 5px 10px 5px 200px;
+        text-decoration: none;
+        font-size: 25px;
+        color: #919191;
+        display: block;
+        transition: 0.3s;
+        text-align: right;
+    }
+
+    .nav ul li a:hover, .nav ul li a:focus, .nav ul li a:active {
+        color: #FFF;
+    }
+
+    #nav-close:hover{
+        color: #FFF;
+    }
+
+    .nav ul li.active > a {
+        color: #FFF !important;
+    }
+
+    .nav ul li a {
+        color: #919191;	
+    }
+
+    .sidebar .closebtn {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
+    }
+}

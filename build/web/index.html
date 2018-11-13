@@ -6,46 +6,45 @@
         <!-- Use this type of comment within HTML -->
         <link href="style/myStyle.css" rel="stylesheet" type="text/css" />
         <link href="style/listStyle.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="style/navBar.css">
     </head>
     <body>
-
-        <div id="titleNav">
-
-            <!-- The style sheet has pageTitle floated left -->
-            <div id="pageTitle">
-                Ice Cream Locator
+        <nav class="nav" role="navigation">
+            <div class="container">
+                <div class="row">
+                    <div class="col-4">
+                        <div id="logo"><a href="index.html"/>Ice Cream Locator</div>
+                    </div>
+                    <a class="menu" href="#" onclick="openNav()"><img id="mobile-menu" src="icons/hamburger.svg"/></a>
+                    <div class="col-8 text-right">
+                        <div id="mySidebar" class="sidebar"><a id="nav-close" onclick="closeNav()">&times;</a>
+                            <ul>
+                                <li><a onclick = "ajaxCall('htmlPartials/homeContent.html', setContent, setError)">Home</a></li>
+                                <li class="dropdown"><a href="#">Data</a><i class="fa fa-caret-down"></i>
+                                <div class="dropdown-content">
+                                    <a onclick = "userCRUD.list()">Users</a>
+                                    <a onclick = "otherCRUD.list()">Flavor</a>
+                                    <a onclick = "assocCRUD.list()">Supply</a>
+                                 </div>
+                                </li>
+                                <li><a onclick = "ajaxCall('htmlPartials/blogContent.html', setContent, setError)">Blog</a></li>
+                                <li class="dropdown"><a href="#">Account</a><i class="fa fa-caret-down"></i>
+                                <div class="dropdown-content">
+                                    <a onclick = "ajaxCall('htmlPartials/logonContent.html', setContent, setError)">Log on</a><br/>
+                                    <a onclick = "ajaxCall('webAPIs/logoffAPI.jsp', setUserContent, setError)">Log off</a><br/>
+                                    <a onclick = "ajaxCall('webAPIs/getProfileAPI.jsp', setUserContent, setError)">Profile</a><br>
+                                    <a onclick = 'userCRUD.startInsert()'>Register</a>
+                                 </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <!-- The style sheet has nav floated right -->
-            <div id="nav">
-                <div><a  onclick = "ajaxCall('htmlPartials/homeContent.html', setContent, setError) ">Home</a></div>
-                <div class="dropdown" onclick="toggleChild(this)">Data
-                    <div class="dropdown-content">
-                        <!--<a class="cld" onclick = "ajaxCall('webAPIs/listUsersAPI.jsp', setUserContent, setError)">Users</a><br/>-->
-                        <a onclick = "userCRUD.list()">Users</a><br/>
-                        <!--<a class="cld" onclick = "ajaxCall('webAPIs/listOtherAPI.jsp', setUserContent, setError)">Flavors</a><br/>-->
-                        <a onclick = "otherCRUD.list()">Flavors</a><br/>
-                        <!--<a class="cld" onclick = "ajaxCall('webAPIs/listAssocAPI.jsp', setUserContent, setError)">Supply</a>-->
-                        <a onclick = "assocCRUD.list()">Supply</a><br/>
-                    </div>
-                </div>
-                <div><a onclick = " ajaxCall('htmlPartials/blogContent.html', setContent, setError) ">Blog</a></div> 
-                <div class="dropdown" onclick="toggleChild(this)">Account
-                    <div class="dropdown-content">
-                        <a onclick = "ajaxCall('htmlPartials/logonContent.html', setContent, setError)">Log on</a><br/>
-                        <a onclick = "ajaxCall('webAPIs/logoffAPI.jsp', setUserContent, setError)">Log off</a><br/>
-                        <a onclick = "ajaxCall('webAPIs/getProfileAPI.jsp', setUserContent, setError)">Profile</a><br>
-                        <a onclick = 'userCRUD.startInsert()'>Register</a>
-                    </div>
-                </div>
-             </div>
-            <div class="stopFloat"></div>
-            <div id="content"></div>
-
-            <!-- Must stop the floating so that elements below (e.g., content) 
-            don't float up into here. -->
-            <div class="stopFloat"></div>
-        </div>
+        </nav>
+        
         <div id="content"></div>
         
         <div id="footer">
@@ -61,6 +60,7 @@
         <script src="js/makePickList.js"></script>
         <script src="js/dropDownMenu.js"></script>
         <script src="js/logon.js"></script>
+        <script src="js/nav.js"></script>
 
         <script>
 

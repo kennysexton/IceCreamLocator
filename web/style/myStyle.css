@@ -1,17 +1,24 @@
-body {
-    margin: 0;
-    font-family: 'Open Sans', "Lucida Grande", sans-serif;
-    background-color: rgb(127, 208, 216);  
-    font-size:16px;
+* {
+    font-family: "Montserrat", "Open Sans", sans-serif; 
 }
 
-#titleNav {
-    font-family: open sans;
-    color: #333;
-    background-color:white;
-    height: 79px;
-    min-width:540px;
+body {
+    margin: 0;
+/*    background: linear-gradient(60deg, #006BCC, #108DE5, #24BEFF, #39DAFF, #4DF3FF); */
+    background-color: #24BEFF !important;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.7;
+    overflow-x: hidden;
 }
+
+.center {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 
 #pageTitle { 
     padding-top:10px;
@@ -22,82 +29,19 @@ body {
     text-align:center;
     float:left;
 }
-#nav {
-    margin-right:3%;
-    float:right; /* shares same line with PageTitle */
-    letter-spacing: 1px;
-}
-
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f1f1f1;
-    min-width: 100px;
-    overflow: auto;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-}
-
-.dropdown-content a {
-    color: black;
-    padding: 2px 2px;
-    font-size: 12px;
-    text-decoration: none;
-    display: block;
-}
-
-.dropdown a:hover {background-color: #ddd;}
-/* "#nav a" styles links inside of element with id="nav" */
-#nav a {
-    text-decoration:none;  /* Do not links in "nav" to be underlined */
-    color: #080808; /* light gray */
-    cursor: pointer;
-    padding-top: 0px;
-}
-
-/* Styles any div inside of an element with id="nav". */
-#nav div {
-    margin-top:3px;
-    float:left;
-    font-size:18px;
-    padding: 34px 7px 0px 7px;
-    height: 33px;
-    text-align:center;
-    letter-spacing: 1px;
-    font-weight:bold;
-}
-
-a .cld { 
-    padding: 0px !important;
-    margin: 0px;
-}
 
 /* When the user hover's over a div that's inside of and element with 
    id="nav", this styling will kick in. */
-#nav div:hover {
+/*#nav div:hover {
     background-color: white; 
-}
+}*/
 
-/* When the user hovers over a div that's inside of an element with 
-   id="nav", the text of links inside the div will change color. */
-#nav div:hover a {
-    color: #000;
-}
-
-.stopFloat { /* We float divs left in desktop layout to create multiple columns. Put
-                a "clear:both" rule where you want to stop the floating (like page eject). */
-    clear:both;
-}
 #content {
-    padding-left:4px;	
+    padding-left:4px;
     padding-right:4px;	
     padding-bottom: 30px;
     padding-top: 4%;
+    margin: 0 auto;
 }
 
 /* I made the footer be always fixed to the bottom of the browser window. */
@@ -106,8 +50,8 @@ a .cld {
     bottom:0px;
     left:0xp;
     width:100%;
-    background-color:#FFF;
-    color: #333;
+    background-color: #222;
+    color: #FFF;
     clear:both;
     text-align:center;
     padding:5px;	 	 

@@ -27,16 +27,8 @@ nav a {
   transition: 0.5s;
 }
 
-nav a:hover, a:active, a:focus {
+nav a:hover, a:active, a:focus {  /* we don't want links to have an underline */
   text-decoration: none;
-}
-
-.container {
-  max-width: 1140px;
-  position: relative;
-  margin: 0 auto;
-  padding-left: 15px;
-  padding-right: 15px;
 }
 
 .nav {
@@ -48,7 +40,6 @@ nav a:hover, a:active, a:focus {
   width: 100%;
   padding: 30px 0;
   z-index: 0;
-  
 }
 
 .nav #logo {
@@ -103,6 +94,7 @@ nav a:hover, a:active, a:focus {
     position: absolute;
     left: 88%;
     padding:6px;
+    padding-top: 4px;
 }
 
 #nav-close {
@@ -131,7 +123,8 @@ nav a:hover, a:active, a:focus {
         visibility: visible;
         font-size: 30px;
         right: 0px;
-        top: 0px
+        top: 0px;
+        color: #919191;
     }
 
     .sidebar {
@@ -197,115 +190,16 @@ nav a:hover, a:active, a:focus {
 }
 
 @media screen and (min-width: 1021px) {
-        /*Dropdown Style*/
-    .dropdown-content {
-        display: none;
-        position: absolute;
-        right: 20px;
-        background-color: #fafafa;
-        min-width: 20px;
-        box-shadow: 1.2px 4px 8px 0px rgba(0,0,0,0.30);
-        z-index: 1;
-    }
-    .dropdown-content a {
-        float: none;
-        color: black;
-        padding: 12px 18px;
-        text-decoration: none;
-        display: block;
-        text-align: left;
-    }
-
-    .dropdown:hover .dropdown-content {
-        display: block;   
-    }
-
-    nav a {
-      -webkit-transition: 0.5s;
-      -o-transition: 0.5s;
-      transition: 0.5s;
-    }
-
-    nav a:hover, a:active, a:focus {
-      text-decoration: none;
-    }
-
-    .container {
-      max-width: 1140px;
-      position: relative;
-      margin: 0 auto;
-      padding-left: 15px;
-      padding-right: 15px;
-    }
-
-    .nav {
-      position: relative;
-      background-color: #FFF;
-      top: 0;
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      padding: 30px 0;
-      z-index: 0;
-
-    }
-
-    .nav #logo {
-      font-size: 20px;
-      margin: 0;
-      padding: 0;
-      text-transform: uppercase;
-      font-weight: bold;
-    }
-
-    .nav #logo a {
-      color: #000;
-    }
-    .nav #logo em {
-      color: #fff;
-    }
-
-    .nav ul {
-      padding: 0;
-      margin: .4em 0 0 0;
-    }
-    .nav ul li {
-      padding: 0;
-      margin: 0;
-      list-style: none;
-      display: inline;
-      line-height: 1.5;
-    }
-    .nav ul li > a {
-      text-transform: uppercase;
-      font-size: 13px !important;
-      letter-spacing: .05em;
-    }
-    .nav ul li a {
-      padding: 30px 10px;
-      color: #000;
-      -webkit-transition: 0.5s;
-      -o-transition: 0.5s;
-      transition: 0.5s;
-    }
-
-    .nav ul li a:hover, .nav ul li a:focus, .nav ul li a:active {
-      color: #000;
-    }
-
-    .nav ul li.active > a {
-      color: #000 !important;
-    }
-
-    #mobile-menu {
-        visibility: hidden;
-        position: absolute;
-        left: 88%;
-        padding:6px;
-    }
-
-    #nav-close {
-        visibility: hidden;
-        position: absolute;
-    }
+  .nav ul li {
+        display: inline;
+   }
+    
+  .sidebar a {
+        text-align: right;
+  }
+    
+/*    .sidebar {
+        width: 0px;
+        display: hidden;
+    }*/
 }

@@ -20,9 +20,9 @@
 .dropdown:hover .dropdown-content, active {
     display: block;   
 }
-/*.dropdown-content .active {
+.dropdown-content .active {
     display: block;  
-}*/
+}
 
 nav a {
   -webkit-transition: 0.5s;
@@ -85,9 +85,6 @@ nav a:hover, a:active, a:focus {  /* we don't want links to have an underline */
   transition: 0.5s;
 }
 
-.nav ul li a:hover, .nav ul li a:focus, .nav ul li a:active {
-  color: #000;
-}
 
 .nav ul li.active > a {
   color: #000 !important;
@@ -153,6 +150,10 @@ nav a:hover, a:active, a:focus {  /* we don't want links to have an underline */
         text-align: right;
     }
    
+    .nav ul li:hover, .nav ul li:focus, .nav ul li:active {
+        color: #FFF;
+    }
+    
     .nav ul li a:hover, .nav ul li a:focus, .nav ul li a:active {
         color: #FFF;
     }
@@ -182,11 +183,11 @@ nav a:hover, a:active, a:focus {  /* we don't want links to have an underline */
         margin-left: 50px;
     }
     
-    
     .dropdown:hover .dropdown-content {
         display: block;
         position: static;
         background-color: #222;
         color: #cccccc;
+        box-shadow: none;
     }
 }

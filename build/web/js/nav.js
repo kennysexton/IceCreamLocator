@@ -14,11 +14,11 @@ $(window).on('resize',function(){
     }
 });
 
-$('.dropdown').click(function(){
-    
-    if($().hasClass('active')){
-        $(this).removeClass('active')
+
+$('.dropdown a').click(function(){
+    if($(this).hasClass('active')){
+        $(this).removeClass('active');
     } else {
-        $(this).addClass('active')
+        $(this).addClass('active');
     }
 });

@@ -2,11 +2,11 @@
 .dropdown-content {
     display: none;
     position: absolute;
-    right: 20px;
+    right: 0px;
     background-color: #fafafa;
     min-width: 20px;
     box-shadow: 1.2px 4px 8px 0px rgba(0,0,0,0.30);
-    z-index: 1;
+    z-index: 2;
 }
 .dropdown-content a {
     float: none;
@@ -17,14 +17,18 @@
     text-align: left;
 }
 
-.dropdown:hover .dropdown-content {
+.dropdown:hover .dropdown-content, active {
     display: block;   
 }
+/*.dropdown-content .active {
+    display: block;  
+}*/
 
 nav a {
   -webkit-transition: 0.5s;
   -o-transition: 0.5s;
   transition: 0.5s;
+  cursor: pointer;
 }
 
 nav a:hover, a:active, a:focus {  /* we don't want links to have an underline */
@@ -162,7 +166,8 @@ nav a:hover, a:active, a:focus {  /* we don't want links to have an underline */
     }
 
     .nav ul li a {
-        color: #919191;	
+        color: #919191;
+        padding-right: 8px;
     }
     
     .nav li {
@@ -177,9 +182,6 @@ nav a:hover, a:active, a:focus {  /* we don't want links to have an underline */
         margin-left: 50px;
     }
     
-    .fa {
-        display: none;
-    }
     
     .dropdown:hover .dropdown-content {
         display: block;
@@ -187,19 +189,4 @@ nav a:hover, a:active, a:focus {  /* we don't want links to have an underline */
         background-color: #222;
         color: #cccccc;
     }
-}
-
-@media screen and (min-width: 1021px) {
-  .nav ul li {
-        display: inline;
-   }
-    
-  .sidebar a {
-        text-align: right;
-  }
-    
-/*    .sidebar {
-        width: 0px;
-        display: hidden;
-    }*/
 }

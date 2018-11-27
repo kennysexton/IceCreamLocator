@@ -18,7 +18,7 @@ $( document ).ready(function() {
           var imgBottom = ((winBottom - imgY) * speed);
           // Max number of pixels until block disappear
           var imgTop = winH + parentH;
-          // Porcentage between start showing until disappearing
+          // Percentage between start showing until disappearing
           var imgPercent = ((imgBottom / imgTop) * 100) + (50 - (speed * 50));
         }
         img.css({

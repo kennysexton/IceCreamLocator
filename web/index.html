@@ -9,20 +9,21 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="style/navBar.css">
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     </head>
     <body>
         <nav class="nav" role="navigation">
             <div class="container">
                 <div class="row">
-                    <div class="col-4">
+                    <div class="col-5">
                         <div id="logo"><a href="index.html"/>Ice Cream Locator</div>
                     </div>
                     <a class="menu" href="#" onclick="openNav()"><img id="mobile-menu" src="icons/hamburger.svg"/></a>
-                    <div class="col-8 text-right">
+                    <div class="col-7 text-right">
                         <div id="mySidebar" class="sidebar"><a id="nav-close" onclick="closeNav()">&times;</a>
                             <ul>
                                 <li><a onclick = "ajaxCall('htmlPartials/homeContent.html', setContent, setError)">Home</a></li>
-                                <li class="dropdown"><a href="#">Data</a><i class="fa fa-caret-down"></i>
+                                <li class="dropdown"><a href="#">Data <i class="fa fa-caret-down"></i></a>
                                 <div class="dropdown-content">
                                     <a onclick = "userCRUD.list()">Users</a>
                                     <a onclick = "otherCRUD.list()">Flavor</a>
@@ -30,7 +31,7 @@
                                  </div>
                                 </li>
                                 <li><a onclick = "ajaxCall('htmlPartials/blogContent.html', setContent, setError)">Blog</a></li>
-                                <li class="dropdown"><a href="#">Account</a><i class="fa fa-caret-down"></i>
+                                <li class="dropdown"><a href="#">Account <i class="fa fa-caret-down"></i></a>
                                 <div class="dropdown-content">
                                     <a onclick = "ajaxCall('htmlPartials/logonContent.html', setContent, setError)">Log on</a><br/>
                                     <a onclick = "ajaxCall('webAPIs/logoffAPI.jsp', setUserContent, setError)">Log off</a><br/>
@@ -60,7 +61,7 @@
         <script src="js/makePickList.js"></script>
         <script src="js/logon.js"></script>
         <script src="js/nav.js"></script>
-        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        
 
         
 

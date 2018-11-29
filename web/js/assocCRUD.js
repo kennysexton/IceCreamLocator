@@ -12,6 +12,9 @@ var assocCRUD = {};
             // Place the inserttUser html snippet into the content area.
             console.log("Ajax call was successful.");
             document.getElementById("content").innerHTML = httpRequest.responseText;
+            
+            document.getElementById("updateSaveSupplyButton").style.display = "none";
+            document.getElementById("supplyIdRow").style.display = "none";
 
             ajaxCall("webAPIs/getFlavorAPI.jsp", setFlavorList, "flavor_idError");
             ajaxCall("webAPIs/getStoreAPI.jsp", setStoreList, "storeError");
@@ -161,11 +164,65 @@ var assocCRUD = {};
                 // remove a property from each object in webUserList
                 var id = obj.supplyList[i].supply_id;
                 obj.supplyList[i].delete = "<img src='icons/delete.png'  onclick='assocCRUD.delete(" + id + ",this)'  />";
+                obj.supplyList[i].update = "<img onclick='assocCRUD.startUpdate(" + id + ")' src='icons/update.png' />";
                 
             }
  
             buildTable(obj.supplyList, obj.dbError, dataList);
         }
     };
+    
+    assocCRUD.startUpdate = function (supplyId) {
+
+        console.log("startUpdate");
+
+        // make ajax call to get the insert/update user UI
+        ajaxCall('htmlPartials/insertAssoc.html', setUpdateUI, "content");
+
+        // place the insert/update user UI into the content area
+        function setUpdateUI(httpRequest) {
+            console.log("Ajax call was successful.");
+            document.getElementById("content").innerHTML = httpRequest.responseText;
+
+            document.getElementById("insertSaveSupplyButton").style.display = "none";
+
+            // Call the Get User by id API and (if success), fill the UI with the User data
+            ajaxCall("webAPIs/getAssocByIdAPI.jsp?id=" + supplyId, displayUser, "recordError");
+
+            function displayUser(httpRequest) {
+                var obj = JSON.parse(httpRequest.responseText);
+                if (obj.supplyS.errorMsg.length > 0) {
+                    document.getElementById("recordError").innerHTML = "Database error: " +
+                            obj.supplyS.errorMsg;
+                } else if (obj.supplyS.supply_id.length < 1) {
+                    document.getElementById("recordError").innerHTML = "There is no user with id '" +
+                            supplyId + "' in the database";
+                } else if (obj.flavor_dropdown.dbError.length > 0) {
+                    document.getElementById("recordError").innerHTML += "<br/>Error extracting the Flavor List options from the database: " +
+                            obj.flavor_dropdown.dbError;
+                } else {
+                    var supplyObj = obj.supplyS;
+                    //console.log(obj.supplyS);
+                    document.getElementById("supplyIdRow").value = supplyObj.supply_id;
+                    document.getElementById("selling_price").value = supplyObj.selling_price;
+                    document.getElementById("special_additions").value = supplyObj.special_additions;
+
+                    makePickList(obj.flavor_dropdown.flavorList, // list of key/value objects for role pick list
+                            "flavor_id", // key property name
+                            "flavor_name", // value property name
+                            "flavorPickList", // id of dom element where to put role pick list
+                            supplyObj.flavor_id); // key to be selected (role id fk in web_user object)
+                            
+                            
+                     makePickList(obj.store_dropdown.webUserList, // list of key/value objects for role pick list
+                            "web_user_id", // key property name
+                            "store_name", // value property name
+                            "storePickList", // id of dom element where to put role pick list
+                            supplyObj.web_user_id); //
+                }
+            }
+        } // setUpdateUI
+    };
+    
 
 }());  // the end of the IIFE

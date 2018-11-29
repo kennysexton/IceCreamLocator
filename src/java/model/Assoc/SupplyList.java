@@ -1,11 +1,13 @@
 /*
 This class will be good for web user update - provides a single web user plus the list of user Roles (for pick list).
  */
-package model.webUser;
+package model.Assoc;
 
-public class WebUserWithRoleList {
+
+public class SupplyList {
     
-    public StringData webUser = new StringData();
-    public model.role.StringDataList role = new model.role.StringDataList();
+    public StringData supplyS = new StringData();
+    public model.Other.StringDataList flavor_dropdown = new model.Other.StringDataList();
+    public model.webUser.StringDataList store_dropdown = new model.webUser.StringDataList();
     
 }

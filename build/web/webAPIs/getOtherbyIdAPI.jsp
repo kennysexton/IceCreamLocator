@@ -7,13 +7,13 @@
 
 <%
     
-    WebUserWithRoleList wurl = new WebUserWithRoleList();
+    FlavorList wurl = new FlavorList();
     wurl.otherS = new StringData();
     //wurl.role = new model.role.StringDataList();
     
     String searchId = request.getParameter("id");
     if (searchId == null) {
-        wurl.otherS.errorMsg = "Cannot search for web user - 'id' most be supplied as URL parameter";
+        wurl.otherS.errorMsg = "Cannot search for flavor - 'id' most be supplied as URL parameter";
     } else {
 
         DbConn dbc = new DbConn();

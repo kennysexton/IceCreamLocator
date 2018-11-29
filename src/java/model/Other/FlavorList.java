@@ -4,7 +4,7 @@ This class will be good for web user update - provides a single web user plus th
 package model.Other;
 
 
-public class WebUserWithRoleList {
+public class FlavorList {
     
     public StringData otherS = new StringData();
     //public model.role.StringDataList role = new model.role.StringDataList();

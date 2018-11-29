@@ -1,6 +1,11 @@
 <div id="insertArea">
 
     <table>
+        <tr id='supplyIdRow'>
+            <td>Supply Id</td>
+            <td><input type="text"  id="supplyId" disabled="disabled"/></td>
+            <td ></td> 
+        </tr>
         <tr>
             <td>Selling Price</td>
             <td><input type="text"  id="selling_price" /></td>
@@ -34,7 +39,11 @@
             <td id="storeError" class="error"></td>
         </tr>
         <tr>
-            <td><button onclick="assocCRUD.insertSave()">Save</button></td>
+            <td>
+                <button id="insertSaveSupplyButton" onclick="assocCRUD.insertSave()">Save</button>
+                <button id="updateSaveSupplyButton" onclick="userCRUD.updateSave()">Update</button>
+            
+            </td>
             <td id="recordError" class="error"></td>
             <td></td>
         </tr>

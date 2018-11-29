@@ -1,4 +1,4 @@
-package model.webUser;
+package model.Assoc;
 
 import dbUtils.*;
 import java.sql.PreparedStatement;
@@ -6,16 +6,18 @@ import java.sql.ResultSet;
 
 public class Search {
 
-    public static StringData getUserById(DbConn dbc, String id) {
+    public static StringData getAssocById(DbConn dbc, String id) {
 
         //PreparedStatement stmt = null;
         //ResultSet results = null;
         StringData sd = new StringData();
         try {
-            String sql = "SELECT web_user_id, user_email, user_password, membership_fee, birthday, store_name, "
-                    + "web_user.user_role_id, user_role_type "
-                    + "FROM web_user, user_role WHERE web_user.user_role_id = user_role.user_role_id "
-                    + "AND web_user_id = ?";
+            String sql = "SELECT supply_id, selling_price, special_additions, "
+                    + "f.flavor_id, flavor_name, w.web_user_id, store_name "
+                    + "FROM supply s "
+                    + "JOIN flavor f ON f.flavor_id=s.flavor_id "
+                    + "JOIN web_user w ON w.web_user_id = s.web_user_id "
+                    + "WHERE supply_id = ?";
 
             PreparedStatement stmt = dbc.getConn().prepareStatement(sql);
 
@@ -30,7 +32,7 @@ public class Search {
             results.close();
             stmt.close();
         } catch (Exception e) {
-            sd.errorMsg = "Exception thrown in WebUserView.getUserById(): " + e.getMessage();
+            sd.errorMsg = "Exception thrown in Supply.getUserById(): " + e.getMessage();
         }
         return sd;
     }

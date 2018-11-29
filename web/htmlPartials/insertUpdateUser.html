@@ -1,6 +1,11 @@
 <div id="insertArea">
 
     <table>
+        <tr id='webUserIdRow'>
+            <td>Web User Id</td>
+            <td><input type="text"  id="webUserId" disabled="disabled"/></td>
+            <td ></td> 
+        </tr>
         <tr>
             <td>Email Address</td>
             <td><input type="text"  id="userEmail" /></td>
@@ -39,7 +44,10 @@
         </tr>
         <tr>
             <!-- see js/insertUser.js to see the insertUser function (make sure index.html referencesinvokes the js file) -->
-            <td><button onclick="userCRUD.insertSave()">Save</button></td>
+            <td>
+                <button id="insertSaveUserButton" onclick="userCRUD.insertSave()">Insert</button>
+                <button id="updateSaveUserButton" onclick="userCRUD.updateSave()">Update</button>
+            </td>
             <td id="recordError" class="error"></td>
             <td></td>
         </tr>

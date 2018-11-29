@@ -1,4 +1,4 @@
-function makePickList (list, keyProp, valueProp, selectListId) {
+function makePickList (list, keyProp, valueProp, selectListId, desiredValue) {
 
     // get reference to the DOM select tag for the role)
     var selectList = document.getElementById(selectListId);
@@ -10,5 +10,14 @@ function makePickList (list, keyProp, valueProp, selectListId) {
         
         // add option into the select list
         selectList.appendChild(myOption);
+    }
+    if (desiredValue) {
+        console.log("setting picklist option to this value " + desiredValue);
+
+        for (var i = 0; i < selectList.options.length; i++) {
+            if (selectList.options[i].value === desiredValue) {
+                selectList.selectedIndex = i;
+            }
+        }
     }
 }

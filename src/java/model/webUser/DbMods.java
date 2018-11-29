@@ -92,13 +92,6 @@ public class DbMods {
 
         } else { // all fields passed validation
 
-            /*
-                String sql = "SELECT web_user_id, user_email, user_password, membership_fee, birthday, "+
-                    "web_user.user_role_id, user_role_type "+
-                    "FROM web_user, user_role where web_user.user_role_id = user_role.user_role_id " + 
-                    "ORDER BY web_user_id ";
-             */
-
             String sql = "UPDATE web_user SET user_email=?, user_password=?, membership_fee=?, birthday=?, "+
                     "user_role_id=? WHERE web_user_id = ?";
 
@@ -126,6 +119,7 @@ public class DbMods {
                     errorMsgs.errorMsg = ""; // This means SUCCESS. Let the user interface decide how to tell this to the user.
                 } else {
                     // probably never get here unless you forgot your WHERE clause and did a bulk sql update.
+                    
                     errorMsgs.errorMsg = numRows + " records were updated (expected to update one record).";
                 }
             } else if (errorMsgs.errorMsg.contains("foreign key")) {

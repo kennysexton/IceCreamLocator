@@ -1,10 +1,11 @@
-package model.webUser;
+package model.Other;
 
 import dbUtils.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class Search {
+
 
     public static StringData getUserById(DbConn dbc, String id) {
 

@@ -1,6 +1,11 @@
 <div id="insertArea">
 
     <table>
+        <tr id='flavorIdRow'>
+            <td>Flavor ID</td>
+            <td><input type="text"  id="FlavorId" disabled="disabled"/></td>
+            <td ></td> 
+        </tr>
         <tr>
             <td>Flavor Name</td>
             <td><input type="text"  id="flavor_name" /></td>
@@ -17,8 +22,11 @@
             <td id="flavor_colorError" class="error"></td>
         </tr>
         <tr>
-            
-            <td><button onclick="otherCRUD.insertSave()">Save</button></td>
+            <td>
+                <button id="insertSaveFlavorButton" onclick="otherCRUD.insertSave()">Save</button>
+                <button id="updateSaveFlavorButton" onclick="otherCRUD.updateSave()">Update</button>
+            </td>
+
             <td id="recordError2" class="error"></td>
             <td></td>
         </tr>

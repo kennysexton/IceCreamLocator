@@ -13,6 +13,9 @@ var otherCRUD = {};
             // Place the inserttUser html snippet into the content area.
             console.log("Ajax call was successful.");
             document.getElementById("content").innerHTML = httpRequest.responseText;
+            
+             document.getElementById("updateSaveFlavorButton").style.display = "none";
+            document.getElementById("flavorIdRow").style.display = "none";
 
         }
     };
@@ -129,11 +132,57 @@ var otherCRUD = {};
                 // remove a property from each object in webUserList
                 var id = obj.flavorList[i].flavor_id;
                 obj.flavorList[i].delete = "<img src='icons/delete.png'  onclick='otherCRUD.delete(" + id + ",this)'  />";
+                obj.flavorList[i].update = "<img onclick='otherCRUD.startUpdate(" + id + ")' src='icons/update.png' />";
                 
             }
 
             buildTable(obj.flavorList, obj.dbError, dataList);
         }
+    };
+    
+    otherCRUD.startUpdate = function (userId) {
+
+        console.log("startUpdate");
+
+        // make ajax call to get the insert/update user UI
+        ajaxCall('htmlPartials/insertOther.html', setUpdateUI, "content");
+
+        // place the insert/update user UI into the content area
+        function setUpdateUI(httpRequest) {
+            console.log("Ajax call was successful.");
+            document.getElementById("content").innerHTML = httpRequest.responseText;
+
+            document.getElementById("insertSaveFlavorButton").style.display = "none";
+            //document.getElementById("updateSaveUserButton").style.display = "inline";
+
+            // Call the Get User by id API and (if success), fill the UI with the User data
+            ajaxCall("webAPIs/getUserByIdAPI.jsp?id=" + userId, displayUser, "recordError");
+
+            function displayUser(httpRequest) {
+                var obj = JSON.parse(httpRequest.responseText);
+                if (obj.flavor.errorMsg.length > 0) {
+                    document.getElementById("recordError").innerHTML = "Database error: " +
+                            obj.flavor.errorMsg;
+                } else if (obj.flavor.web_user_id.length < 1) {
+                    document.getElementById("recordError").innerHTML = "There is no user with id '" +
+                            userId + "' in the database";
+                } else if (obj.role.dbError.length > 0) {
+                    document.getElementById("recordError").innerHTML += "<br/>Error extracting the Role List options from the database: " +
+                            obj.role.dbError;
+                } else {
+                    var otherObj = obj.flavor;
+                    console.log(obj.flavor);
+                    document.getElementById("webUserId").value = userObj.web_user_id;
+                    document.getElementById("userEmail").value = userObj.userEmail;
+                    document.getElementById("userPassword").value = userObj.userPassword;
+                    document.getElementById("userPassword2").value = userObj.userPassword;
+                    document.getElementById("birthday").value = userObj.birthday;
+                    document.getElementById("membershipFee").value = userObj.membershipFee;
+
+
+                }
+            }
+        } // setUpdateUI
     };
 
 }());

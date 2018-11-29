@@ -35,7 +35,7 @@ var userCRUD = {}; // globally available object
         }
     };
     
-        function getUserDataFromUI() {
+    function getUserDataFromUI() {
 
         var ddList = document.getElementById("rolePickList");
 

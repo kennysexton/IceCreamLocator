@@ -21,10 +21,10 @@ function parallaxImg () {
         transform: 'translate(-50%, -' + imgPercent + '%)'
       });
     }
-    $(document).on({
-      scroll: function () {
-        parallaxImg();
-      }, ready: function () {
-        parallaxImg();
-      }
-});
+//    $(document).on({
+//      scroll: function () {
+//        parallaxImg();
+//      }, ready: function () {
+//        parallaxImg();
+//    }
+//    });

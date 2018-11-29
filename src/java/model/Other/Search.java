@@ -7,16 +7,15 @@ import java.sql.ResultSet;
 public class Search {
 
 
-    public static StringData getUserById(DbConn dbc, String id) {
+    public static StringData getOtherById(DbConn dbc, String id) {
 
         //PreparedStatement stmt = null;
         //ResultSet results = null;
         StringData sd = new StringData();
         try {
-            String sql = "SELECT web_user_id, user_email, user_password, membership_fee, birthday, store_name, "
-                    + "web_user.user_role_id, user_role_type "
-                    + "FROM web_user, user_role WHERE web_user.user_role_id = user_role.user_role_id "
-                    + "AND web_user_id = ?";
+            String sql = "SELECT flavor_id, flavor_name, date_added, flavor_color "
+                    + "FROM flavor, user_role WHERE flavor_id = ?";
+                    
 
             PreparedStatement stmt = dbc.getConn().prepareStatement(sql);
 
@@ -31,7 +30,7 @@ public class Search {
             results.close();
             stmt.close();
         } catch (Exception e) {
-            sd.errorMsg = "Exception thrown in WebUserView.getUserById(): " + e.getMessage();
+            sd.errorMsg = "Exception thrown in Other.getUserById(): " + e.getMessage();
         }
         return sd;
     }

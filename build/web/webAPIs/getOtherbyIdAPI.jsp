@@ -8,23 +8,23 @@
 <%
     
     WebUserWithRoleList wurl = new WebUserWithRoleList();
-    wurl.webUser = new StringData();
-    wurl.role = new model.role.StringDataList();
+    wurl.otherS = new StringData();
+    //wurl.role = new model.role.StringDataList();
     
     String searchId = request.getParameter("id");
     if (searchId == null) {
-        wurl.webUser.errorMsg = "Cannot search for web user - 'id' most be supplied as URL parameter";
+        wurl.otherS.errorMsg = "Cannot search for web user - 'id' most be supplied as URL parameter";
     } else {
 
         DbConn dbc = new DbConn();
-        wurl.webUser.errorMsg = dbc.getErr(); // returns "" if connection is good, else db error msg.
+        wurl.otherS.errorMsg = dbc.getErr(); // returns "" if connection is good, else db error msg.
 
-        if (wurl.webUser.errorMsg.length() == 0) { // if got good DB connection,
+        if (wurl.otherS.errorMsg.length() == 0) { // if got good DB connection,
 
             System.out.println("*** Ready to call getUserById");
-            wurl.webUser = Search.getUserById(dbc, searchId);
+            wurl.otherS = Search.getOtherById(dbc, searchId);
             
-            wurl.role= view.RoleView.allRolesAPI(dbc); 
+            //wurl.role= view.RoleView.allRolesAPI(dbc); 
         }
 
         dbc.close(); // EVERY code path that opens a db connection, must also close it - no DB Conn leaks.

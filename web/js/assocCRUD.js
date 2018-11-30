@@ -48,6 +48,50 @@ var assocCRUD = {};
             }
         }
     };
+    
+    function getUserDataFromUI() {
+
+        var ffList = document.getElementById("flavorPickList");
+        var ssList = document.getElementById("storePickList");
+        
+        // strip $ and commas from dollar amount before trying to encode user data for update.
+        var dollar = stripDollar(document.getElementById("selling_price").value);
+
+        // create a user object from the values that the user has typed into the page.
+        var userInputObj = {
+            "supply_id": document.getElementById("supplyId").value,
+            "selling_price": dollar,
+            "special_additions": document.getElementById("special_additions").value,
+
+            // Modification here for role pick list
+            "flavor_id": ffList.options[ffList.selectedIndex].value,
+            "flavor_name": "",
+            
+            "web_user_id": ssList.options[ssList.selectedIndex].value,
+            "store_name": "",
+            
+            "errorMsg": ""
+        };
+
+        console.log(userInputObj);
+
+        // build the url for the ajax call. Remember to escape the user input object or else 
+        // you'll get a security error from the server. JSON.stringify converts the javaScript
+        // object into JSON format (the reverse operation of what gson does on the server side).
+        return escape(JSON.stringify(userInputObj));
+    }
+
+    function writeErrorObjToUI(jsonObj) {
+        console.log("here is JSON object (holds error messages.");
+        console.log(jsonObj);
+
+        document.getElementById("selling_priceError").innerHTML = jsonObj.selling_price;
+        document.getElementById("special_additionsError").innerHTML = jsonObj.special_additions;
+        document.getElementById("flavor_idError").innerHTML = jsonObj.flavor_id;
+        document.getElementById("storeError").innerHTML = jsonObj.web_user_id;
+
+        document.getElementById("recordError").innerHTML = jsonObj.errorMsg;
+    }
 
 
     assocCRUD.insertSave = function () {
@@ -57,7 +101,7 @@ var assocCRUD = {};
         var fList = document.getElementById("flavorPickList");
         var sList = document.getElementById("storePickList");
 
-        // create a user object from the values that the user has typed into the page.
+        // create a assoc object from the values that the assoc has typed into the page.
         var assocInputObj = {
             "supply_id": "",
             "selling_price": document.getElementById("selling_price").value,
@@ -66,7 +110,7 @@ var assocCRUD = {};
             "flavor_id": fList.options[fList.selectedIndex].value,
             //"web_user_id": 1,
 
-            "web_user_id": sList.options[sList.selectedIndex].value, // broken at the momnet
+            "web_user_id": sList.options[sList.selectedIndex].value, 
 
             "flavor_name": "",
             "store_name": "",
@@ -203,7 +247,7 @@ var assocCRUD = {};
                 } else {
                     var supplyObj = obj.supplyS;
                     //console.log(obj.supplyS);
-                    document.getElementById("supplyIdRow").value = supplyObj.supply_id;
+                    document.getElementById("supplyId").value = supplyObj.supply_id;
                     document.getElementById("selling_price").value = supplyObj.selling_price;
                     document.getElementById("special_additions").value = supplyObj.special_additions;
 
@@ -223,6 +267,39 @@ var assocCRUD = {};
             }
         } // setUpdateUI
     };
+    
+    assocCRUD.updateSave = function () {
+
+        console.log("assocCRUD.updateSave was called");
+        var myData = getUserDataFromUI();
+        var url = "webAPIs/updateAssocAPI.jsp?jsonData=" + myData;
+        ajaxCall(url, processUpdate, "recordError");
+
+        function processUpdate(httpRequest) {
+            console.log("processUpdate was called here is httpRequest.");
+            console.log(httpRequest);
+
+            // the server prints out a JSON string of an object that holds field level error 
+            // messages. The error message object (conveniently) has its fields named exactly 
+            // the same as the input data was named. 
+            var jsonObj = JSON.parse(httpRequest.responseText); // convert from JSON to JS Object.
+            console.log("here is JSON object (holds error messages.");
+            console.log(jsonObj);
+
+            if (jsonObj.errorMsg.length === 0) { // success
+                jsonObj.errorMsg = "Record successfully updated !!!";
+            }
+
+            writeErrorObjToUI(jsonObj);
+
+        }
+    };
+    
+    function stripDollar(dollar) {
+        dollar = dollar.replace("$", ""); // replace $ with empty string
+        dollar = dollar.replace(",", ""); // replace comma with empty string
+        return dollar;
+    }
     
 
 }());  // the end of the IIFE

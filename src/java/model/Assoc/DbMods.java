@@ -69,6 +69,55 @@ public class DbMods {
         return errorMsgs;
     } // insert
     
+    public static StringData update(StringData inputData, DbConn dbc) {
+
+        StringData errorMsgs = new StringData();
+        errorMsgs = validate(inputData);
+        if (errorMsgs.getCharacterCount() > 0) {  // at least one field has an error, don't go any further.
+            errorMsgs.errorMsg = "Please try again";
+            return errorMsgs;
+
+        } else { // all fields passed validation
+
+            String sql = "UPDATE supply SET selling_price=?, special_additions=?, "+
+                    "flavor_id=?, web_user_id=? WHERE supply_id = ?";
+
+            // PrepStatement is Sally's wrapper class for java.sql.PreparedStatement
+            // Only difference is that Sally's class takes care of encoding null 
+            // when necessary. And it also System.out.prints exception error messages.
+            PrepStatement pStatement = new PrepStatement(dbc, sql);
+            
+
+            // Encode string values into the prepared statement (wrapper class).
+            pStatement.setBigDecimal(1, ValidationUtils.decimalConversion(inputData.selling_price));
+            pStatement.setString(2, inputData.special_additions); // string type is simple
+            pStatement.setInt(3, ValidationUtils.integerConversion(inputData.flavor_id));
+            pStatement.setInt(4, ValidationUtils.integerConversion(inputData.web_user_id));
+            pStatement.setInt(5, ValidationUtils.integerConversion(inputData.supply_id));
+
+            // here the SQL statement is actually executed
+            int numRows = pStatement.executeUpdate();
+
+            // This will return empty string if all went well, else all error messages.
+            errorMsgs.errorMsg = pStatement.getErrorMsg();
+            if (errorMsgs.errorMsg.length() == 0) {
+                if (numRows == 1) {
+                    errorMsgs.errorMsg = ""; // This means SUCCESS. Let the user interface decide how to tell this to the user.
+                } else {
+                    // probably never get here unless you forgot your WHERE clause and did a bulk sql update.
+                    
+                    errorMsgs.errorMsg = numRows + " records were updated (expected to update one record).";
+                }
+            } else if (errorMsgs.errorMsg.contains("foreign key")) {
+                errorMsgs.errorMsg = "Invalid supply_Id";
+            } else if (errorMsgs.errorMsg.contains("Duplicate entry")) {
+                errorMsgs.errorMsg = "That supply is already taken";
+            }
+
+        } // customerId is not null and not empty string.
+        return errorMsgs;
+    } // update
+    
     public static String delete(String supply_id, DbConn dbc) {
 
         if (supply_id == null) {

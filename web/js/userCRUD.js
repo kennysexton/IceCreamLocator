@@ -30,7 +30,7 @@ var userCRUD = {}; // globally available object
                     return;
                 }
 
-                makePickList(jsonObj.roleList, "userRoleId", "userRoleType", "rolePickList");
+                makePickList(jsonObj.roleList, "user_role_id", "userRoleType", "rolePickList");
             }
         }
     };
@@ -40,19 +40,19 @@ var userCRUD = {}; // globally available object
         var ddList = document.getElementById("rolePickList");
 
         // strip $ and commas from dollar amount before trying to encode user data for update.
-        var dollar = stripDollar(document.getElementById("membershipFee").value);
+        var dollar = stripDollar(document.getElementById("membership_fee").value);
 
         // create a user object from the values that the user has typed into the page.
         var userInputObj = {
-            "web_users_id": document.getElementById("webUserId").value,
-            "userEmail": document.getElementById("userEmail").value,
-            "userPassword": document.getElementById("userPassword").value,
-            "userPassword2": document.getElementById("userPassword2").value,
+            "web_user_id": document.getElementById("webUserId").value,
+            "user_email": document.getElementById("user_email").value,
+            "user_password": document.getElementById("user_password").value,
+            "user_password2": document.getElementById("user_password2").value,
             "birthday": document.getElementById("birthday").value,
-            "membershipFee": dollar,
+            "membership_fee": dollar,
 
             // Modification here for role pick list
-            "userRoleId": ddList.options[ddList.selectedIndex].value,
+            "user_role_id": ddList.options[ddList.selectedIndex].value,
 
             "userRoleType": "",
             "errorMsg": ""
@@ -70,12 +70,12 @@ var userCRUD = {}; // globally available object
         console.log("here is JSON object (holds error messages.");
         console.log(jsonObj);
 
-        document.getElementById("userEmailError").innerHTML = jsonObj.userEmail;
-        document.getElementById("userPasswordError").innerHTML = jsonObj.userPassword;
-        document.getElementById("userPassword2Error").innerHTML = jsonObj.userPassword2;
+        document.getElementById("user_emailError").innerHTML = jsonObj.user_email;
+        document.getElementById("userPasswordError").innerHTML = jsonObj.user_password;
+        document.getElementById("userPassword2Error").innerHTML = jsonObj.user_password2;
         document.getElementById("birthdayError").innerHTML = jsonObj.birthday;
-        document.getElementById("membershipFeeError").innerHTML = jsonObj.membershipFee;
-        document.getElementById("userRoleIdError").innerHTML = jsonObj.userRoleId;
+        document.getElementById("membershipFeeError").innerHTML = jsonObj.membership_fee;
+        document.getElementById("userRoleIdError").innerHTML = jsonObj.user_role_id;
 
         document.getElementById("recordError").innerHTML = jsonObj.errorMsg;
     }
@@ -91,14 +91,14 @@ var userCRUD = {}; // globally available object
         // create a user object from the values that the user has typed into the page.
         var userInputObj = {
             "web_user_id": "",
-            "userEmail": document.getElementById("userEmail").value,
-            "userPassword": document.getElementById("userPassword").value,
-            "userPassword2": document.getElementById("userPassword2").value,
+            "user_email": document.getElementById("user_email").value,
+            "user_password": document.getElementById("user_password").value,
+            "user_password2": document.getElementById("user_password2").value,
             "birthday": document.getElementById("birthday").value,
-            "membershipFee": document.getElementById("membershipFee").value,
+            "membership_fee": document.getElementById("membership_fee").value,
 
             // Modification here for role pick list
-            "userRoleId": ddList.options[ddList.selectedIndex].value,
+            "user_role_id": ddList.options[ddList.selectedIndex].value,
 
             "userRoleType": "",
             "errorMsg": ""
@@ -123,12 +123,12 @@ var userCRUD = {}; // globally available object
             console.log("here is JSON u object (holds error messages.");
             console.log(jsonObju);
 
-            document.getElementById("userEmailError").innerHTML = jsonObju.userEmail;
-            document.getElementById("userPasswordError").innerHTML = jsonObju.userPassword;
+            document.getElementById("user_emailError").innerHTML = jsonObju.user_email;
+            document.getElementById("userPasswordError").innerHTML = jsonObju.user_password;
             document.getElementById("userPassword2Error").innerHTML = jsonObju.userPassword2;
             document.getElementById("birthdayError").innerHTML = jsonObju.birthday;
-            document.getElementById("membershipFeeError").innerHTML = jsonObju.membershipFee;
-            document.getElementById("userRoleIdError").innerHTML = jsonObju.userRoleId;
+            document.getElementById("membershipFeeError").innerHTML = jsonObju.membership_fee;
+            document.getElementById("userRoleIdError").innerHTML = jsonObju.user_role_id;
 
             if (jsonObju.errorMsg.length === 0) { // success
                 jsonObju.errorMsg = "Record successfully inserted !!!";
@@ -201,7 +201,7 @@ var userCRUD = {}; // globally available object
                 var id = obj.webUserList[i].web_user_id;
                 obj.webUserList[i].delete = "<img src='icons/delete.png'  onclick='userCRUD.delete(" + id + ",this)'  />";
                 obj.webUserList[i].update = "<img onclick='userCRUD.startUpdate(" + id + ")' src='icons/update.png' />";
-                delete obj.webUserList[i].userPassword2;
+                delete obj.webUserList[i].user_password2;
             }
 
             // buildTable Parameters: 
@@ -245,17 +245,17 @@ var userCRUD = {}; // globally available object
                     var userObj = obj.webUser;
                     //console.log(obj.webUser);
                     document.getElementById("webUserId").value = userObj.web_user_id;
-                    document.getElementById("userEmail").value = userObj.userEmail;
-                    document.getElementById("userPassword").value = userObj.userPassword;
-                    document.getElementById("userPassword2").value = userObj.userPassword;
+                    document.getElementById("user_email").value = userObj.user_email;
+                    document.getElementById("user_password").value = userObj.user_password;
+                    document.getElementById("user_password2").value = userObj.user_password;
                     document.getElementById("birthday").value = userObj.birthday;
-                    document.getElementById("membershipFee").value = userObj.membershipFee;
+                    document.getElementById("membership_fee").value = userObj.membership_fee;
 
                     makePickList(obj.role.roleList, // list of key/value objects for role pick list
-                            "userRoleId", // key property name
+                            "user_role_id", // key property name
                             "userRoleType", // value property name
                             "rolePickList", // id of dom element where to put role pick list
-                            userObj.userRoleId); // key to be selected (role id fk in web_user object)
+                            userObj.user_role_id); // key to be selected (role id fk in web_user object)
                 }
             }
         } // setUpdateUI

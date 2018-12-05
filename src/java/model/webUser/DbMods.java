@@ -18,16 +18,16 @@ public class DbMods {
 
          
         // Validation
-        errorMsgs.userEmail = ValidationUtils.stringValidationMsg(inputData.userEmail, 45, true);
-        errorMsgs.userPassword = ValidationUtils.stringValidationMsg(inputData.userPassword, 45, true);
+        errorMsgs.user_email = ValidationUtils.stringValidationMsg(inputData.user_email, 45, true);
+        errorMsgs.user_password = ValidationUtils.stringValidationMsg(inputData.user_password, 45, true);
 
-        if (inputData.userPassword.compareTo(inputData.userPassword2) != 0) { // case sensative comparison
-            errorMsgs.userPassword2 = "Both passwords must match";
+        if (inputData.user_password.compareTo(inputData.user_password2) != 0) { // case sensative comparison
+            errorMsgs.user_password2 = "Both passwords must match";
         }
 
         errorMsgs.birthday = ValidationUtils.dateValidationMsg(inputData.birthday, false);
-        errorMsgs.membershipFee = ValidationUtils.decimalValidationMsg(inputData.membershipFee, false);
-        errorMsgs.userRoleId = ValidationUtils.integerValidationMsg(inputData.userRoleId, true);
+        errorMsgs.membership_fee = ValidationUtils.decimalValidationMsg(inputData.membership_fee, false);
+        errorMsgs.user_role_id = ValidationUtils.integerValidationMsg(inputData.user_role_id, true);
 
         return errorMsgs;
     } // validate 
@@ -53,11 +53,11 @@ public class DbMods {
             PrepStatement pStatement = new PrepStatement(dbc, sql);
 
             // Encode string values into the prepared statement (wrapper class).
-            pStatement.setString(1, inputData.userEmail); // string type is simple
-            pStatement.setString(2, inputData.userPassword);
-            pStatement.setBigDecimal(3, ValidationUtils.decimalConversion(inputData.membershipFee));
+            pStatement.setString(1, inputData.user_email); // string type is simple
+            pStatement.setString(2, inputData.user_password);
+            pStatement.setBigDecimal(3, ValidationUtils.decimalConversion(inputData.membership_fee));
             pStatement.setDate(4, ValidationUtils.dateConversion(inputData.birthday));
-            pStatement.setInt(5, ValidationUtils.integerConversion(inputData.userRoleId));
+            pStatement.setInt(5, ValidationUtils.integerConversion(inputData.user_role_id));
 
             // here the SQL statement is actually executed
             int numRows = pStatement.executeUpdate();
@@ -93,7 +93,7 @@ public class DbMods {
         } else { // all fields passed validation
 
             String sql = "UPDATE web_user SET user_email=?, user_password=?, membership_fee=?, birthday=?, "+
-                    "user_role_id=? WHERE web_user_id = ?";
+                    "user_role_id=?  WHERE web_user_id = ?";
 
             // PrepStatement is Sally's wrapper class for java.sql.PreparedStatement
             // Only difference is that Sally's class takes care of encoding null 
@@ -102,11 +102,11 @@ public class DbMods {
             
 
             // Encode string values into the prepared statement (wrapper class).
-            pStatement.setString(1, inputData.userEmail); // string type is simple
-            pStatement.setString(2, inputData.userPassword);
-            pStatement.setBigDecimal(3, ValidationUtils.decimalConversion(inputData.membershipFee));
+            pStatement.setString(1, inputData.user_email); // string type is simple
+            pStatement.setString(2, inputData.user_password);
+            pStatement.setBigDecimal(3, ValidationUtils.decimalConversion(inputData.membership_fee));
             pStatement.setDate(4, ValidationUtils.dateConversion(inputData.birthday));
-            pStatement.setInt(5, ValidationUtils.integerConversion(inputData.userRoleId));
+            pStatement.setInt(5, ValidationUtils.integerConversion(inputData.user_role_id));
             pStatement.setInt(6, ValidationUtils.integerConversion(inputData.web_user_id));
 
             // here the SQL statement is actually executed

@@ -25,7 +25,6 @@ function buildTable(list, dbErrorMsg, target) {
     } // end function alignCell
 
 // Make column heading pretty. (The column heading name is probably coming from a java property field name.) 
-// Capitalize the first letter, then insert space before every subsequent capital letter. "userEmail" --> "User Email"
     function prettyColumnHeading(colHdg) {
         if (colHdg.length === 0) {
             return "";

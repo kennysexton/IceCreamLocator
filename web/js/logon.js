@@ -15,8 +15,8 @@ function logonFn (emailId, pwId, msgId) {
         } else {
             msg += "<br/>Welcome Web User number " + obj.webUserList[0].web_user_id;
             msg += "<br/> &nbsp; with Birthday: " + obj.webUserList[0].birthday;
-            msg += "<br/> &nbsp; and MembershipFee: " + obj.webUserList[0].membershipFee;
-            msg += "<br/> &nbsp; and User Role Id: " + obj.webUserList[0].userRoleId;
+            msg += "<br/> &nbsp; and Membership_fee: " + obj.webUserList[0].membership_fee;
+            msg += "<br/> &nbsp; and User Role Id: " + obj.webUserList[0].user_role_id;
             msg += "<br/> &nbsp; and User Role: " + obj.webUserList[0].userRoleType;
         }
         

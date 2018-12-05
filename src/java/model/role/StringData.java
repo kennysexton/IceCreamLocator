@@ -12,7 +12,7 @@ import java.sql.ResultSet;
  * free access to put data in or take it out. */
 public class StringData {
 
-    public String userRoleId = "";   // Foreign Key
+    public String user_role_id = "";   // Foreign Key
     public String userRoleType = ""; // getting it from joined user_role table.
 
     public String errorMsg = "";
@@ -24,7 +24,7 @@ public class StringData {
     // overloaded constructor sets all data members by extracting from resultSet.
     public StringData(ResultSet results) {
         try {
-            this.userRoleId = FormatUtils.formatInteger(results.getObject("user_role_id"));
+            this.user_role_id = FormatUtils.formatInteger(results.getObject("user_role_id"));
             this.userRoleType = FormatUtils.formatString(results.getObject("user_role_type"));
         } catch (Exception e) {
             this.errorMsg = "Exception thrown in model.role.StringData (the constructor that takes a ResultSet): "
@@ -33,7 +33,7 @@ public class StringData {
     }
 
     public String toString() {
-        return ", User Role Id: " + this.userRoleId
+        return ", User Role Id: " + this.user_role_id
                 + ", User Role Type: " + this.userRoleType;
     }
 }

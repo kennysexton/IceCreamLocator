@@ -27,6 +27,8 @@
             // Must use gson to convert JSON (that the user provided as part of the url, the jsonUpdateData. 
             // Convert from JSON (JS object notation) to POJO (plain old java object).
             StringData updateData = gson.fromJson(jsonUpdateData, StringData.class);
+            errorMsgs.errorMsg = " " + updateData;
+            System.out.println(errorMsgs.errorMsg);
             
             // this method takes the user's input data as input and outputs an error message object (with same field names).
             errorMsgs = DbMods.update(updateData, dbc); // this is the form level message

@@ -18,6 +18,7 @@ function logonFn (emailId, pwId, msgId) {
             msg += "<br/> &nbsp; and Membership_fee: " + obj.webUserList[0].membership_fee;
             msg += "<br/> &nbsp; and User Role Id: " + obj.webUserList[0].user_role_id;
             msg += "<br/> &nbsp; and User Role: " + obj.webUserList[0].userRoleType;
+            msg += "<br/> &nbsp; and Store Name: " + obj.webUserList[0].store_name;
         }
         
         document.getElementById(msgId).innerHTML = msg;
